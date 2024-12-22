@@ -1,0 +1,53 @@
+[
+    {
+      "name": "QuickFix Services",
+      "logo": "https://images.squarespace-cdn.com/content/v1/5d8e7da68ac7e3190f77356c/1571777577827-QJARIZKYPQTYSF040VZJ/QuickFix-Logo-01-03.png",
+      "description": "Renowned for their reliable home repair and maintenance services, rated 4.8 by users."
+    },
+    {
+      "name": "Healthy Eats",
+      "logo": "https://t3.ftcdn.net/jpg/00/84/15/06/360_F_84150619_lFvoqNRPYq0gf5vmIz54HUmoJaBTjJRL.jpg",
+      "description": "Providing fresh, organic meal deliveries. Partnered to ensure quality and health."
+    },
+    {
+      "name": "TravelWise",
+      "logo": "https://dcassetcdn.com/design_img/3696436/695449/22004866/g278cx2fn5p4fr0tejmtayc8zk_image.jpg",
+      "description": "Experts in budget-friendly travel packages with user ratings averaging 4.7."
+    },
+    {
+      "name": "SkillUp Academy",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBNH0BQBzZJLlF3hY8nUfa0U7hPsa1FKekWg&s",
+      "description": "Leading online education provider with a focus on career-building courses."
+    },
+    {
+      "name": "FitLife Trainers",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvUEOj017S8APki7qM5GQ0CBgXy7t2Qo-HOw&s",
+      "description": "Top-rated personal fitness trainers helping users achieve their health goals."
+    },
+    {
+      "name": "BrightClean",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi_VSvYNi3hUmO9QPtj-M2MR-17dpxjelyIQ&s",
+      "description": "Specializing in eco-friendly cleaning services with a 4.9 average rating."
+    },
+    {
+      "name": "ShopEase",
+      "logo": "https://play-lh.googleusercontent.com/QGrAyCWOD1y8YfSLde7FRDSIadKaMVWpKn-hgxNzs4UT4g9Bz1I0DblRkLdMUJ8gdlGs",
+      "description": "A trusted platform for online shopping with user-centric services."
+    },
+    {
+      "name": "FinSecure",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJWEuXAfCNkdxHLFCQpu3fWB2xqE0k4QXt0A&s",
+      "description": "Providing expert financial planning and insurance solutions."
+    },
+    {
+      "name": "HomeStyle Renovators",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRF0tdPuSHW5dHurKaNLt93iTTdAscYt3Itmg&s",
+      "description": "Highly recommended for stylish and affordable home renovations."
+    },
+    {
+      "name": "Eventify Planners",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMD6mE58VFSGDnI0pMxnQ-cDG6eetmRzSO0g&s",
+      "description": "Rated 5 stars for creating memorable events and celebrations."
+    }
+  ]
+  

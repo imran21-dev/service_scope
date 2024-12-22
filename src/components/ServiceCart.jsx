@@ -1,0 +1,28 @@
+import { GoArrowRight } from "react-icons/go";
+import PropTypes from "prop-types";
+
+const ServiceCart = ({service}) => {
+    const {price,serviceImage,serviceTitle,description} = service
+   
+    return (
+        <div className="card hover:-translate-y-1 duration-200 rounded-3xl  border border-secondaryTextColor/5">
+        <figure className="p-5">
+          <img
+          className="w-full object-cover h-52 rounded-2xl"
+            src={serviceImage}
+            alt="Shoes" />
+        </figure>
+        <div className="card-body px-5 pt-0 pb-5">
+          <h2 className="text-xl font-bold truncate">{serviceTitle}</h2>
+          <p className="line-clamp-2  h-12 text-secondaryTextColor/50">{description}</p>
+          <h2 className="font-medium">Price: ${price}</h2>
+         <button className="btn myBtn mt-1 w-max">See Details <GoArrowRight /></button>
+        </div>
+      </div>
+    );
+};
+
+ServiceCart.propTypes = {
+    service: PropTypes.object
+}
+export default ServiceCart;
