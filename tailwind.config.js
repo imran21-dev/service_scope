@@ -12,6 +12,11 @@ export default {
         secondaryTextColor: '#150B2B',
         
       },
+      backgroundImage: {
+        
+        'bannerImg' : "url('')",
+  
+      },
     },
   },
   plugins: [daisyui],

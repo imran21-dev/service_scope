@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
+import { Button } from "@mui/material";
 
 const Navbar = () => {
   return (
@@ -66,9 +67,10 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end space-x-2">
-        <button className="btn myBtn">Login</button>
-        <button className="btn myBtn">Log Out</button>
-        <button className="btn myBtn">Register</button>
+      <Button variant="contained" className="mt-1 w-max !px-6 !bg-pColor hover:!bg-pColor !shadow-none hover:!text-white !rounded-full !capitalize">Login </Button>
+      <Link to='/register'><Button variant="contained" className="mt-1 myBtn">Register </Button></Link>
+      <Button variant="contained" className="mt-1 myBtn">Log Out </Button>
+      
         <div className="avatar">
           <div className="mask mask-hexagon w-12">
             <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />

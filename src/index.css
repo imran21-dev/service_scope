@@ -24,11 +24,7 @@ transition: .2s ease-in-out;
 }
 
 .myBtn{
- border-radius: 50px;
- min-height: max-content;
- height: max-content;
- padding: 12px 30px;
- border: none
+@apply w-max !px-6 !bg-black/5 !text-black hover:!bg-pColor !shadow-none hover:!text-white !rounded-full !capitalize
 }
 
 .slider-li{

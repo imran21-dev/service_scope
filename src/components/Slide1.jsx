@@ -2,7 +2,7 @@
 
 const Slide1 = () => {
     return (
-        <div className="w-full  py-96">
+        <div className="w-full py-96">
            
             <h1 className="text-3xl font-bold">Empowering Informed Choices</h1>
             <p className="py-2">
