@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { createContext, useState } from "react";
 
-import { createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase.config";
 
 export const ThemeContext = createContext(null)
@@ -12,6 +12,15 @@ const ContextApi = ({children}) => {
   const registration = (email, password) => {
     setProcessing(true)
     return createUserWithEmailAndPassword(auth, email, password)
+  }
+
+  const login = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password)
+  }
+
+  const provider = new GoogleAuthProvider();
+  const GoogleSignIn = () => {
+    return signInWithPopup(auth, provider)
   }
 
 
@@ -28,7 +37,10 @@ const ContextApi = ({children}) => {
 
    const theme= {
    registration,
-   user
+   user,
+   login,
+   GoogleSignIn,
+   processing
    }
    console.log(user)
 

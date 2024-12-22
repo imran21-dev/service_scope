@@ -1,8 +1,70 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { Button } from "@mui/material";
+import { useContext } from "react";
+import { ThemeContext } from "../provider/ContextApi";
+import Swal from "sweetalert2";
+import { signOut } from "firebase/auth";
+import { auth } from "../provider/firebase.config";
 
 const Navbar = () => {
+  const { user, processing } = useContext(ThemeContext);
+
+  const handleLogOut = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to log out?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#f12804",
+      cancelButtonColor: "#16A34A",
+      confirmButtonText: "Yes",
+      customClass: {
+        title: "text-xl  md:text-3xl font-bold ",
+        text: "text-3xl ",
+        popup: "text-black rounded-3xl ",
+        confirmButton: "bg-[#16A34A] rounded-full py-[10px] px-[30px]",
+        cancelButton: "bg-[#16A34A] rounded-full py-[10px] px-[30px]",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        signOut(auth)
+          .then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Logged out!",
+              text: "Logout Successful!",
+              confirmButtonText: "Okay",
+              scrollbarPadding: false,
+              showConfirmButton: false,
+              timer: 1500,
+              customClass: {
+                title: "text-xl  md:text-3xl font-bold ",
+                text: "text-3xl ",
+                popup: "text-black rounded-3xl outline outline-[#16A34A]",
+                confirmButton: "bg-[#16A34A] rounded-full py-[10px] px-[30px]",
+              },
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Failed !",
+              text: `${error?.code}`,
+              confirmButtonText: "Retry",
+              scrollbarPadding: false,
+              customClass: {
+                title: "text-xl md:text-3xl font-bold ",
+                text: "text-3xl",
+                popup: "bg-white text-black rounded-3xl ",
+                confirmButton: "bg-[#f12804] rounded-full py-[10px] px-[30px]",
+              },
+            });
+          });
+      }
+    });
+  };
+
   return (
     <div className="navbar w-10/12 mx-auto">
       <div className="navbar-start">
@@ -67,15 +129,59 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end space-x-2">
-      <Button variant="contained" className="mt-1 w-max !px-6 !bg-pColor hover:!bg-pColor !shadow-none hover:!text-white !rounded-full !capitalize">Login </Button>
-      <Link to='/register'><Button variant="contained" className="mt-1 myBtn">Register </Button></Link>
-      <Button variant="contained" className="mt-1 myBtn">Log Out </Button>
-      
-        <div className="avatar">
-          <div className="mask mask-hexagon w-12">
-            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-          </div>
-        </div>
+        {processing ? (
+          <>
+            <div className="skeleton py-[6px] text-transparent rounded-full px-6">
+              Login
+            </div>
+            <div className="skeleton py-[6px] text-transparent rounded-full px-6">
+              Register
+            </div>
+
+            <div className="skeleton py-[6px] text-transparent rounded-full px-6">
+              Log Out
+            </div>
+            <div className="skeleton h-10 w-10 shrink-0 rounded-full"></div>
+          </>
+        ) : (
+          <>
+            {user ? (
+              <>
+                <Button
+                  onClick={handleLogOut}
+                  variant="contained"
+                  className="mt-1 myBtn"
+                >
+                  Log Out{" "}
+                </Button>
+
+                <img
+                  className="w-10 h-10 rounded-full object-cover"
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  alt=""
+                />
+              </>
+            ) : (
+              <>
+                <Link to="/login">
+                  {" "}
+                  <Button
+                    variant="contained"
+                    className="mt-1 w-max !px-6 !bg-pColor hover:!bg-pColor !shadow-none hover:!text-white !rounded-full !capitalize"
+                  >
+                    Login{" "}
+                  </Button>
+                </Link>
+
+                <Link to="/register">
+                  <Button variant="contained" className="mt-1 myBtn">
+                    Register{" "}
+                  </Button>
+                </Link>
+              </>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-
 import { Alert, IconButton } from "@mui/material";
 import { useContext, useState } from "react";
 
@@ -11,63 +10,102 @@ import {
   RiMailFill,
   RiUser2Fill,
 } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../provider/ContextApi";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
-  const [passwordError, setPasswordError] = useState(false)
-
-
+  const [passwordError, setPasswordError] = useState(false);
+  const navigate = useNavigate();
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const resetPassword = () => {
-    const passwordField = document.querySelector('#passwordField')
-    passwordField.value = ''
-    setPasswordError(false)
-   
+    const passwordField = document.querySelector("#passwordField");
+    passwordField.value = "";
+    setPasswordError(false);
+  };
 
-  }
-
-  const {registration} = useContext(ThemeContext)
+  const { registration } = useContext(ThemeContext);
   const handleRegister = (e) => {
-    e.preventDefault()
-    setLoading(true)
+    e.preventDefault();
+    setLoading(true);
     const formData = Object.fromEntries(new FormData(e.target).entries());
-    const {password,email} = formData
+    const { password, email } = formData;
     const regex = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6,}$/;
     if (!regex.test(password)) {
-        setPasswordError(true)
-        setLoading(false)
-        return
+      setPasswordError(true);
+      setLoading(false);
+      return;
     }
 
-    registration(email,password)
-    .then(res => {
-      setLoading(false)
-      console.log(res.user)
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  
-  }
+    registration(email, password)
+      .then(() => {
+        setLoading(false);
+
+        Swal.fire({
+          icon: "success",
+          title: "Success!",
+          text: "Registration Complete!",
+          confirmButtonText: "Okay",
+          scrollbarPadding: false,
+          showConfirmButton: false,
+          timer: 1500,
+        customClass: {
+          title: 'text-xl  md:text-3xl font-bold ',
+          text: 'text-3xl ',
+          popup: "text-black rounded-3xl outline outline-[#16A34A]",
+          confirmButton: "bg-[#16A34A] rounded-full py-[10px] px-[30px]",
+        },
+        });
+        e.target.reset();
+
+        navigate("/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: 'Failed !',
+          text: `${error?.code}`,
+          confirmButtonText: "Retry",
+          scrollbarPadding: false,
+          customClass: {
+            title: 'text-xl md:text-3xl font-bold ',
+            text: 'text-3xl',
+            popup: "bg-white text-black rounded-3xl ",
+            confirmButton: "bg-[#f12804] rounded-full py-[10px] px-[30px]",
+          },
+       
+        });
+        setLoading(false);
+        e.target.reset();
+      });
+  };
 
   return (
     <div className="pt-20 relative">
-    <div className="mx-auto w-5/12 px-8">
-    {
-         passwordError &&  <Alert className="absolute  top-7  w-3/12 " severity="error" >
-         <span> Password must be at least 6 characters, including an uppercase and a lowercase letter.</span>
-         <button onClick={resetPassword} className="px-2 font-medium text-pColor hover:underline">Retry</button></Alert>
-        }
-    </div>
+      <div className="mx-auto w-5/12 px-8">
+        {passwordError && (
+          <Alert className="absolute  top-7  w-3/12 " severity="error">
+            <span>
+              {" "}
+              Password must be at least 6 characters, including an uppercase and
+              a lowercase letter.
+            </span>
+            <button
+              onClick={resetPassword}
+              className="px-2 font-medium text-pColor hover:underline"
+            >
+              Retry
+            </button>
+          </Alert>
+        )}
+      </div>
       <form onSubmit={handleRegister} className="card-body w-5/12 mx-auto">
-      
         <h1 className="text-2xl font-bold">Join Us Today!</h1>
         <p className="pb-5">
           Create your account to access exclusive features.
@@ -98,7 +136,6 @@ const Register = () => {
             <input
               type="url"
               name="photo"
-
               placeholder="Your photo URL"
               className=" flex-1 focus:outline-none py-2 px-2 bg-transparent"
               required
@@ -115,7 +152,6 @@ const Register = () => {
             <input
               type="email"
               name="email"
-
               placeholder="Your email"
               className=" flex-1 focus:outline-none py-2 px-2 bg-transparent"
               required
@@ -133,10 +169,9 @@ const Register = () => {
               type={showPassword ? "password" : "text"}
               placeholder="Password"
               name="password"
-              id="passwordField"  
+              id="passwordField"
               className=" flex-1 focus:outline-none py-2 px-2 bg-transparent"
               required
-              
             />
             {showPassword ? (
               <IconButton onClick={handleShowPassword} aria-label="fingerprint">
@@ -151,18 +186,9 @@ const Register = () => {
         </div>
 
         <div className="form-control mt-6">
-       
-      <button className="btn rounded-full py-3 min-h-max h-max bg-pColor border-none text-white hover:bg-pColor">
-            {loading && (
-              <ImSpinner9 className="animate-spin" />
-            )} Register
-
-      </button>
-         
-
-         
-        
-     
+          <button className="btn rounded-full py-3 min-h-max h-max bg-pColor border-none text-white hover:bg-pColor">
+            {loading && <ImSpinner9 className="animate-spin" />} Register
+          </button>
         </div>
         <h1 className="text-sm text-center">
           Already have an account?{" "}

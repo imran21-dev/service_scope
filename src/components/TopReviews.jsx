@@ -1,14 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import TopReviewCart from "./TopReviewCart";
+import ReviewSkeleton from "./ReviewSkeleton";
 
 
 const TopReviews = () => {
     const [topReviews, setTopReviews] = useState([])
+    const skeletonCount = [1,1,1,1,1,1,1,1,1,1]
+  const [skeletonTime, setSkeletonTime] = useState(true)
+
 
 useEffect(()=> {
+    setSkeletonTime(true)
     axios.get('http://localhost:5000/popular-reviews')
-    .then(res => setTopReviews(res.data))
+    .then(res => {
+        setTopReviews(res.data)
+        setSkeletonTime(false)
+    })
 },[])
 
     return (
@@ -16,11 +24,22 @@ useEffect(()=> {
             
             <h1 className="text-xl font-semibold">Top Reviews</h1>
 
-            <div className="grid grid-cols-5 gap-5 py-5">
-                {
-                 topReviews.map(review => <TopReviewCart review={review} key={review._id}></TopReviewCart>)
-                }
-            </div>
+          {
+           skeletonTime ?  <div className="grid grid-cols-5 gap-5 py-5">
+           {
+            skeletonCount.map((skeleton, idx) => <ReviewSkeleton  key={idx}></ReviewSkeleton>)
+           }
+       </div> :
+         <div className="grid grid-cols-5 gap-5 py-5">
+         {
+          topReviews.map(review => <TopReviewCart review={review} key={review._id}></TopReviewCart>)
+         }
+     </div>
+          }
+
+           
+
+           
         </div>
     );
 };
