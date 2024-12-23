@@ -16,9 +16,11 @@ const ServiceCart = ({service}) => {
         <div className="card-body px-5 pt-0 pb-5">
           <h2 className="text-xl font-bold truncate">{serviceTitle}</h2>
           <p className="line-clamp-2  h-12 text-secondaryTextColor/50">{description}</p>
-          <h2 className="font-medium">Price: ${price}</h2>
          
+         <div className="flex items-center justify-between pt-2">
          <Button variant="contained" className="mt-1 myBtn">See Details <GoArrowRight /></Button>
+         <h2 className="font-medium">Price: ${price}</h2>
+         </div>
         </div>
       </div>
     );

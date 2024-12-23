@@ -17,7 +17,7 @@ import TopReviews from "../components/TopReviews";
 const HomePage = () => {
   return (
     <div className="">
-      <section className="">
+      <section className="relative z-0">
        
         <Swiper
           spaceBetween={30}

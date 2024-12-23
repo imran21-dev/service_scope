@@ -1,14 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { Button } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../provider/ContextApi";
 import Swal from "sweetalert2";
 import { signOut } from "firebase/auth";
 import { auth } from "../provider/firebase.config";
+import fakeUser from '../assets/fakeUser.webp'
+import Headroom from "react-headroom";
 
 const Navbar = () => {
   const { user, processing } = useContext(ThemeContext);
+  const photo = user?.photoURL
+
+
+  const handleUserImage = (e) => {
+    e.target.src = fakeUser
+  }
 
   const handleLogOut = () => {
     Swal.fire({
@@ -66,7 +74,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar w-10/12 mx-auto">
+    <Headroom>
+      <div className="navbar w-10/12 mx-auto bg-white relative z-50">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -155,11 +164,13 @@ const Navbar = () => {
                   Log Out{" "}
                 </Button>
 
-                <img
+                 <img
+                  onError={handleUserImage}
                   className="w-10 h-10 rounded-full object-cover"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  src={photo}
                   alt=""
                 />
+               
               </>
             ) : (
               <>
@@ -184,6 +195,7 @@ const Navbar = () => {
         )}
       </div>
     </div>
+    </Headroom>
   );
 };
 

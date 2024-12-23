@@ -10,16 +10,21 @@ import {
   RiMailFill,
   RiUser2Fill,
 } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../provider/ContextApi";
 import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../provider/firebase.config";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(true);
   const [passwordError, setPasswordError] = useState(false);
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const desiredRoute = state?.desiredRoute;
 
+  console.log(desiredRoute);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -35,7 +40,7 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     const formData = Object.fromEntries(new FormData(e.target).entries());
-    const { password, email } = formData;
+    const { password, email, photo, name } = formData;
     const regex = /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]{6,}$/;
     if (!regex.test(password)) {
       setPasswordError(true);
@@ -46,40 +51,65 @@ const Register = () => {
     registration(email, password)
       .then(() => {
         setLoading(false);
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photo,
+        })
+          .then(() => {
+            Swal.fire({
+              icon: "success",
+              title: "Success!",
+              text: "Registration Complete!",
+              confirmButtonText: "Okay",
+              scrollbarPadding: false,
+              showConfirmButton: false,
+              timer: 1500,
+              customClass: {
+                title: "text-xl  md:text-3xl font-bold ",
+                text: "text-3xl ",
+                popup: "text-black rounded-3xl outline outline-[#16A34A]",
+                confirmButton: "bg-[#16A34A] rounded-full py-[10px] px-[30px]",
+              },
+            });
+            e.target.reset();
 
-        Swal.fire({
-          icon: "success",
-          title: "Success!",
-          text: "Registration Complete!",
-          confirmButtonText: "Okay",
-          scrollbarPadding: false,
-          showConfirmButton: false,
-          timer: 1500,
-        customClass: {
-          title: 'text-xl  md:text-3xl font-bold ',
-          text: 'text-3xl ',
-          popup: "text-black rounded-3xl outline outline-[#16A34A]",
-          confirmButton: "bg-[#16A34A] rounded-full py-[10px] px-[30px]",
-        },
-        });
-        e.target.reset();
-
-        navigate("/");
+            if (desiredRoute) {
+              navigate(desiredRoute);
+            } else {
+              navigate("/");
+            }
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Failed !",
+              text: `${error?.code}`,
+              confirmButtonText: "Retry",
+              scrollbarPadding: false,
+              customClass: {
+                title: "text-xl md:text-3xl font-bold ",
+                text: "text-3xl",
+                popup: "bg-white text-black rounded-3xl ",
+                confirmButton: "bg-[#f12804] rounded-full py-[10px] px-[30px]",
+              },
+            });
+            setLoading(false);
+            e.target.reset();
+          });
       })
       .catch((error) => {
         Swal.fire({
           icon: "error",
-          title: 'Failed !',
+          title: "Failed !",
           text: `${error?.code}`,
           confirmButtonText: "Retry",
           scrollbarPadding: false,
           customClass: {
-            title: 'text-xl md:text-3xl font-bold ',
-            text: 'text-3xl',
+            title: "text-xl md:text-3xl font-bold ",
+            text: "text-3xl",
             popup: "bg-white text-black rounded-3xl ",
             confirmButton: "bg-[#f12804] rounded-full py-[10px] px-[30px]",
           },
-       
         });
         setLoading(false);
         e.target.reset();
@@ -192,7 +222,15 @@ const Register = () => {
         </div>
         <h1 className="text-sm text-center">
           Already have an account?{" "}
-          <Link to="/login" className="font-medium text-pColor hover:underline">
+          <Link
+            state={
+              desiredRoute
+                ? { desiredRoute: desiredRoute }
+                : { desiredRoute: "/" }
+            }
+            to="/login"
+            className="font-medium text-pColor hover:underline"
+          >
             Login here
           </Link>
         </h1>

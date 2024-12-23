@@ -181,6 +181,7 @@ const Login = () => {
         <h1 className="text-sm text-center">
           Do not have an account?{" "}
           <Link
+            state={desiredRoute ? {desiredRoute : desiredRoute} : {desiredRoute : '/'}}
             to="/register"
             className="font-medium text-pColor hover:underline"
           >

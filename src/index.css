@@ -30,3 +30,15 @@ transition: .2s ease-in-out;
 .slider-li{
 @apply  bg-pColor/10 border border-pColor/20 px-5 rounded-full py-1 text-pColor text-sm mt-2
 }
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #fa640059;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track{
+background-color: rgba(0, 0, 0, 0.062);
+  width: 10px;
+}

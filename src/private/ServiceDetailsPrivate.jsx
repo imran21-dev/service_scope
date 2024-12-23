@@ -5,7 +5,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 
-const AddServicePrivate = ({children}) => {
+const ServiceDetailsPrivate = ({children}) => {
     const {user, processing} = useContext(ThemeContext)
     const {pathname} = useLocation()
 
@@ -20,7 +20,7 @@ const AddServicePrivate = ({children}) => {
     return <Navigate state={{desiredRoute : pathname}} to='/login'></Navigate>
 };
 
-AddServicePrivate.propTypes = {
+ServiceDetailsPrivate.propTypes = {
     children: PropTypes.element
 }
-export default AddServicePrivate;
+export default ServiceDetailsPrivate;

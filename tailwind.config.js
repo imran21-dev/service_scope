@@ -20,5 +20,11 @@ export default {
     },
   },
   plugins: [daisyui],
+  daisyui: {
+    
+    styled: true,
+    themes: true,
+    base: false, 
+  },
 }
 

@@ -14,6 +14,9 @@ import ContextApi from './provider/ContextApi.jsx';
 import Login from './pages/Login.jsx';
 import AddServicePrivate from './private/AddServicePrivate.jsx';
 import AddService from './pages/AddService.jsx';
+import Services from './pages/Services.jsx';
+import ServiceDetailsPrivate from './private/ServiceDetailsPrivate.jsx';
+import ServiceDetails from './pages/ServiceDetails.jsx';
 
 
 const router = createBrowserRouter([
@@ -36,6 +39,15 @@ const router = createBrowserRouter([
       {
         path: '/add-service',
         element: <AddServicePrivate><AddService></AddService></AddServicePrivate>
+      },
+      {
+        path: '/services',
+        element: <Services></Services>
+      },
+      {
+        path: '/service-details/:id',
+        element: <ServiceDetailsPrivate><ServiceDetails></ServiceDetails></ServiceDetailsPrivate>,
+        loader: ({params})=> params 
       }
     ]
   },
