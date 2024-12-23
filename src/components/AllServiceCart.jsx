@@ -21,7 +21,7 @@ const AllServiceCart = ({service}) => {
 
           <div className="flex items-center  gap-1">
           <h2 className="flex items-center font-medium">Category <IoMdArrowDropright /></h2>
-          <h2 className="font-medium capitalize bg-pColor/20 text-pColor border border-pColor rounded-full px-3 text-sm  py-1 w-max">{category}</h2>
+          <h2 className="font-medium capitalize bg-pColor/5 text-pColor border border-pColor rounded-full px-3 text-sm  py-1 w-max">{category}</h2>
           </div>
           <div className="flex items-center justify-between pt-2">
           

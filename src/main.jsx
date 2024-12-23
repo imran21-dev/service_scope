@@ -17,6 +17,8 @@ import AddService from './pages/AddService.jsx';
 import Services from './pages/Services.jsx';
 import ServiceDetailsPrivate from './private/ServiceDetailsPrivate.jsx';
 import ServiceDetails from './pages/ServiceDetails.jsx';
+import MyReviewsPrivate from './private/MyReviewsPrivate.jsx';
+import MyReviews from './pages/MyReviews.jsx';
 
 
 const router = createBrowserRouter([
@@ -48,7 +50,11 @@ const router = createBrowserRouter([
         path: '/service-details/:id',
         element: <ServiceDetailsPrivate><ServiceDetails></ServiceDetails></ServiceDetailsPrivate>,
         loader: ({params})=> params 
-      }
+      },
+     {
+      path: '/my-reviews',
+      element: <MyReviewsPrivate><MyReviews></MyReviews></MyReviewsPrivate>
+     }
     ]
   },
 ]);

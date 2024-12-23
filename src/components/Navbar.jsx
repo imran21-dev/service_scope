@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { Button } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext,  } from "react";
 import { ThemeContext } from "../provider/ContextApi";
 import Swal from "sweetalert2";
 import { signOut } from "firebase/auth";
@@ -117,7 +117,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <Link className="text-2xl font-bold flex items-center gap-1">
+        <Link to='/' className="text-2xl font-bold flex items-center gap-1">
           <img className="w-8 hue-rotate-180" src={logo} alt="" /> Service Scope
         </Link>
       </div>

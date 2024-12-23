@@ -15,8 +15,10 @@ const AddService = () => {
     const formData = Object.fromEntries(new FormData(e.target).entries());
     const addedDate = new Date().toLocaleDateString("en-GB");
     const userEmail = user?.email;
+    const publisherName = user?.displayName
     formData.addedDate = addedDate;
     formData.userEmail = userEmail;
+    formData.publisherName = publisherName;
 
     axios.post("http://localhost:5000/add-service", formData).then((res) => {
       if (res.data.insertedId) {

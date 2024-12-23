@@ -1,9 +1,10 @@
 import { GoArrowRight } from "react-icons/go";
 import PropTypes from "prop-types";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const ServiceCart = ({service}) => {
-    const {price,serviceImage,serviceTitle,description} = service
+    const {price,serviceImage,serviceTitle,description,_id} = service
    
     return (
         <div className="card hover: duration-200 rounded-3xl  border border-secondaryTextColor/5">
@@ -18,7 +19,9 @@ const ServiceCart = ({service}) => {
           <p className="line-clamp-2  h-12 text-secondaryTextColor/50">{description}</p>
          
          <div className="flex items-center justify-between pt-2">
+         <Link to={`/service-details/${_id}`}>
          <Button variant="contained" className="mt-1 myBtn">See Details <GoArrowRight /></Button>
+         </Link>
          <h2 className="font-medium">Price: ${price}</h2>
          </div>
         </div>
