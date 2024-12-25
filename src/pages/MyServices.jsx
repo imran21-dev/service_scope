@@ -16,6 +16,8 @@ import { RiCloseLargeFill } from "react-icons/ri";
 import { useLoadingBar, } from "react-top-loading-bar";
 import noData from '../assets/noresult.json'
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const MyServices = () => {
@@ -26,19 +28,21 @@ const MyServices = () => {
   const [spinning, setSpinning] = useState(true);
   const [cross, setCross] = useState(false)
   const { start, complete } = useLoadingBar({ color: "#FA6500", height: 2 });
-
+  const axiosSecure = useAxiosSecure()
+  
   useEffect(() => {
     start()
     setCross(false)
     setSpinning(true)
-    axios
-      .get(`http://localhost:5000/my-services?email=${email}`)
+
+   
+    axiosSecure.get(`/my-services?email=${email}`)
       .then((res) => {
         setMyServices(res.data);
         complete()
         setSpinning(false)
       });
-  }, [email, demoLoad, start, complete]);
+  }, [email, demoLoad, start, complete, axiosSecure]);
 
   const [serviceTitleD, setServiceTitle] = useState(null);
   const [serviceImageD, setServiceImage] = useState(null);
@@ -59,7 +63,7 @@ const MyServices = () => {
   const handleUpdate = (id) => {
     setDataLoad(true);
     
-    axios.get(`http://localhost:5000/single-service?id=${id}`).then((res) => {
+    axiosSecure.get(`/single-service?id=${id}`).then((res) => {
       setId(res.data._id);
 
       setServiceTitle(res.data.serviceTitle);
@@ -149,8 +153,8 @@ const MyServices = () => {
       return;
     }
 
-    axios
-      .patch(`http://localhost:5000/update-service/${id}`, formData)
+    axiosSecure
+      .patch(`/update-service/${id}`, formData)
       .then((res) => {
         if (res.data.modifiedCount) {
           Swal.fire({
@@ -190,7 +194,7 @@ const MyServices = () => {
     
     start()
     setSearchResult(true)
-    axios.get(`http://localhost:5000/search-my-services/?email=${email}&keyword=${keyword}`)
+    axiosSecure.get(`/search-my-services/?email=${email}&keyword=${keyword}`)
     .then(res => {
       setSearchResult(false)
       complete()
@@ -199,11 +203,17 @@ const MyServices = () => {
     })
     
   }
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   return (
   
 
     <>
+     <Helmet>
+                  <title>My Services | Service Scope</title>
+                </Helmet>
     {
      spinning ? 
         <div className="w-10/12 mx-auto py-10 relative h-max">

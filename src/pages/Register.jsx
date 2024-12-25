@@ -16,6 +16,7 @@ import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../provider/firebase.config";
 import { useLoadingBar } from "react-top-loading-bar";
+import { Helmet } from "react-helmet-async";
 
 
 const Register = () => {
@@ -126,9 +127,14 @@ const Register = () => {
         e.target.reset();
       });
   };
-
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   return (
     <div className="pt-20 relative">
+       <Helmet>
+                    <title>Register | Service Scope</title>
+                  </Helmet>
       <div className="mx-auto w-5/12 px-8">
         {passwordError && (
           <Alert className="absolute  top-7  w-3/12 " severity="error">

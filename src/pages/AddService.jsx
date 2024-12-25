@@ -6,11 +6,13 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
 import { useLoadingBar } from "react-top-loading-bar";
+import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddService = () => {
   const [loading, setLoading] = useState(false);
   const { start, complete } = useLoadingBar({ color: "#FA6500", height: 2 });
-
+  const axiosSecure = useAxiosSecure()
   useEffect(()=>{
   start()
   setTimeout(()=>{
@@ -20,6 +22,7 @@ const AddService = () => {
   },[complete, start])
 
   const { user } = useContext(ThemeContext);
+  const email = user?.email
   const handleAddService = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -73,7 +76,7 @@ const AddService = () => {
 
   
 
-    axios.post("http://localhost:5000/add-service", formData).then((res) => {
+    axiosSecure.post(`/add-service?email=${email}`, formData).then((res) => {
       if (res.data.insertedId) {
         setLoading(false)
 
@@ -95,9 +98,15 @@ const AddService = () => {
       }
     });
   };
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   return (
     <div className="w-10/12 mx-auto py-10 text-center">
+       <Helmet>
+                    <title>Add Service | Service Scope</title>
+                  </Helmet>
       <h1 className="text-xl font-semibold">Add a New Service</h1>
       <p className="py-1 text-secondaryTextColor/50">
         Provide details to expand your offerings.

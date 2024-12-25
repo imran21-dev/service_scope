@@ -9,8 +9,10 @@ import { FaLocationArrow } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import fakeThumb from '../assets/fakeThumb.jpg'
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
-const MyReviewCard = ({ review, setDemoLoad, demoLoad,handleUpdate }) => {
+
+const MyReviewCard = ({ review, setDemoLoad, demoLoad,handleUpdate,setLoadData }) => {
   const {
     postedDate,
     ratingStar,
@@ -23,7 +25,7 @@ const MyReviewCard = ({ review, setDemoLoad, demoLoad,handleUpdate }) => {
   } = review;
 
   
-
+  const axiosSecure = useAxiosSecure()
   const formattedDate = moment(postedDate).format("MMMM Do YYYY, h:mm A");
 
   const handleDeleteReview = () => {
@@ -44,8 +46,7 @@ const MyReviewCard = ({ review, setDemoLoad, demoLoad,handleUpdate }) => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`http://localhost:5000/delete-review/${_id}`)
+        axiosSecure.delete(`/delete-review/${_id}`)
           .then((res) => {
             if (res.data.deletedCount) {
               Swal.fire({
@@ -111,7 +112,10 @@ const MyReviewCard = ({ review, setDemoLoad, demoLoad,handleUpdate }) => {
 
       <div className="w-1/12  text-right">
      
-        <button onClick={() => handleUpdate(_id)} className="btn btn-ghost text-pColor hover:bg-pColor hover:text-white btn-xs"> 
+        <button onClick={() => {
+          handleUpdate(_id)
+          setLoadData(true)
+          }} className="btn btn-ghost text-pColor hover:bg-pColor hover:text-white btn-xs"> 
           
             Edit</button>
             <button onClick={handleDeleteReview} className="btn btn-ghost text-red-500 hover:bg-red-500 hover:text-white btn-xs">Delete</button>
@@ -128,6 +132,7 @@ MyReviewCard.propTypes = {
   review: PropTypes.object,
   setDemoLoad: PropTypes.func,
   demoLoad: PropTypes.number,
-  handleUpdate : PropTypes.func
+  handleUpdate : PropTypes.func,
+  setLoadData : PropTypes.func,
 };
 export default MyReviewCard;

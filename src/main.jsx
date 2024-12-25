@@ -21,12 +21,15 @@ import MyReviewsPrivate from './private/MyReviewsPrivate.jsx';
 import MyReviews from './pages/MyReviews.jsx';
 import MyServicesPrivate from './private/MyServicesPrivate.jsx';
 import MyServices from './pages/MyServices.jsx';
+import ErrorPage from './pages/ErrorPage.jsx';
+import { HelmetProvider } from 'react-helmet-async';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/',
@@ -67,8 +70,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+     <HelmetProvider>
      <ContextApi>
      <RouterProvider router={router} />
      </ContextApi>
+     </HelmetProvider>
   </StrictMode>,
 )

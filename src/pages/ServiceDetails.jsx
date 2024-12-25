@@ -17,6 +17,8 @@ import RatingSummary from "../components/RatingSummary";
 import fakeThumb from '../assets/fakeThumb.jpg'
 import { ImSpinner9 } from "react-icons/im";
 import { useLoadingBar } from "react-top-loading-bar";
+import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ServiceDetails = () => {
   const { id } = useLoaderData();
@@ -30,18 +32,18 @@ const ServiceDetails = () => {
   const [loadingService, setLoadingService] = useState(true)
   const skeletonCount = [1,1,1,1]
   const { start, complete } = useLoadingBar({ color: "#FA6500", height: 2 });
-
+  const axiosSecure = useAxiosSecure()
   useEffect(() => {
     start()
     setLoadingService(true)
-    axios
-      .get(`http://localhost:5000/single-service?id=${id}`)
+    
+    axiosSecure.get(`/single-service?id=${id}`)
       .then((res) => {
         setLoadingService(false)
         setService(res.data)
         complete()
       });
-  }, [complete, id, start]);
+  }, [axiosSecure, complete, id, start]);
 
   const {
     addedDate,
@@ -77,12 +79,12 @@ const ServiceDetails = () => {
 
   useEffect(()=>{
     setLoading(true)
-    axios.get(`http://localhost:5000/all-reviews?id=${id}`)
+    axiosSecure.get(`/all-reviews?id=${id}`)
     .then(res => {
       setLoading(false)
       setAllReviews(res.data)
     })
-  },[id, demoLoad])
+  },[id, demoLoad, axiosSecure])
 
 
 const [postLoad, setPostLoad] = useState(false)
@@ -129,7 +131,7 @@ const [postLoad, setPostLoad] = useState(false)
       userEmail : currentUserEmail
     };
 
-    axios.post("http://localhost:5000/add-review", review).then((res) => {
+    axiosSecure.post(`/add-review?email=${currentUserEmail}`, review).then((res) => {
       if (res.data.insertedId) {
         setDemoLoad(demoLoad + 1)
     setPostLoad(false)
@@ -154,10 +156,15 @@ const [postLoad, setPostLoad] = useState(false)
   const handleImage = (e) => {
     e.target.src = fakeThumb
   }
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   return (
     <div className="w-10/12 flex gap-6 mx-auto py-10 relative">
-
+<Helmet>
+        <title>{`Service Details - ${_id} | Service Scope`}</title>
+      </Helmet>
       {
        loadingService ? 
     <div className="w-3/5 h-max grid grid-cols-2 gap-4 ">

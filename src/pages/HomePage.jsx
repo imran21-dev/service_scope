@@ -15,10 +15,8 @@ import TopReviews from "../components/TopReviews";
 import CountUp from "react-countup";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import reviews from '../assets/reviews.json'
-import Lottie from "lottie-react";
-import services from '../assets/service.json'
-import users from '../assets/users.json'
+
+import { Helmet } from "react-helmet-async";
 
 
 const HomePage = () => {
@@ -35,8 +33,15 @@ const HomePage = () => {
     .then(res => setAllUser(res.data.length))
   },[])
 
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
+
   return (
     <div className="">
+      <Helmet>
+        <title>Home | Service Scope</title>
+      </Helmet>
       <section className="relative z-0">
        
         <Swiper
@@ -66,34 +71,34 @@ const HomePage = () => {
         </Swiper>
         
       </section>
-       <div className="flex w-10/12 mx-auto ">
+       <div className="flex w-10/12 mx-auto justify-center font-['Exo 2']">
 
       
        
-       <section className="text-pColor px-10 w-44 border-r  pb-5 flex-col flex items-center justify-between">
-        <Lottie className="w-28" animationData={users}></Lottie>
+       <section className=" px-10  w-44 border-r  pb-5 flex-col flex items-center justify-between">
+        
 
-       <div className=" flex-col flex items-center justify-center ">
-        <h1 className="text-3xl  font-extrabold"><CountUp start={0} end={allUser} ></CountUp></h1>
-        <h1 className="uppercase font-semibold mt-1">Users</h1>
+       <div >
+        <h1 className="text-5xl bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allUser} ></CountUp></h1>
+        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent">Users</h1>
        </div>
        </section>
 
-       <section className="text-pColor px-10 w-44 border-r pb-5 flex-col flex items-center justify-between">
-        <Lottie className="w-28" animationData={services}></Lottie>
+       <section className=" px-10 w-44 border-r pb-5 flex-col flex items-center justify-between">
+        
 
-       <div className=" flex-col flex items-center justify-center ">
-        <h1 className="text-3xl  font-extrabold"><CountUp start={0} end={allServices} ></CountUp></h1>
-        <h1 className="uppercase font-semibold mt-1">services</h1>
+       <div >
+        <h1 className="text-5xl bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allServices} ></CountUp></h1>
+        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent">services</h1>
        </div>
        </section>
 
-       <section className="text-pColor px-10 w-44  pb-5 flex-col flex items-center justify-between">
-        <Lottie className="w-28" animationData={reviews}></Lottie>
+       <section className=" px-10 w-44  pb-5 flex-col flex items-center justify-between">
+       
 
-       <div className=" flex-col flex items-center justify-center ">
-        <h1 className="text-3xl  font-extrabold"><CountUp start={0} end={allReviews} ></CountUp></h1>
-        <h1 className="uppercase font-semibold mt-1">Reviews</h1>
+       <div >
+        <h1 className="text-5xl bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allReviews} ></CountUp></h1>
+        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent">Reviews</h1>
        </div>
        </section>
        

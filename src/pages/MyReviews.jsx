@@ -11,6 +11,9 @@ import Swal from "sweetalert2";
 import { useLoadingBar } from "react-top-loading-bar";
 import Lottie from "lottie-react";
 import noData from '../assets/noresult.json'
+import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { PulseLoader } from "react-spinners";
 
 const MyReviews = () => {
   const { user, setBlockScroll } = useContext(ThemeContext);
@@ -19,18 +22,17 @@ const MyReviews = () => {
   const [demoLoad, setDemoLoad] = useState(0);
   const [loading, setLoading] = useState(true)
   const { start, complete } = useLoadingBar({ color: "#FA6500", height: 2 });
-
+  const axiosSecure = useAxiosSecure()
   useEffect(() => {
     start()
     setLoading(true)
-    axios
-      .get(`http://localhost:5000/my-reviews?email=${userMail}`)
+    axiosSecure.get(`/my-reviews?email=${userMail}`)
       .then((res) => {
         setMyReviews(res.data);
         setLoading(false)
         complete()
       });
-  }, [userMail, demoLoad, start, complete]);
+  }, [userMail, demoLoad, start, complete, axiosSecure]);
 
   const [id, setId] = useState(null);
   const [rating, setRating] = useState(null);
@@ -38,14 +40,16 @@ const MyReviews = () => {
   const [text, setText] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const [spinning, setSpinning] = useState(false);
+  const [loadData, setLoadData] = useState(false)
 
   const handleUpdate = (id) => {
-    axios.get(`http://localhost:5000/single-review?id=${id}`).then((res) => {
+    axiosSecure.get(`/single-review?id=${id}`).then((res) => {
       setRating(res.data.ratingStar);
       setDefaultRating(res.data.ratingStar);
       setText(res.data.text);
       setId(res.data._id);
       setBlockScroll(true)
+      setLoadData(false)
       setIsVisible(true);
     });
   };
@@ -100,8 +104,7 @@ const MyReviews = () => {
       return;
     }
 
-    axios
-      .patch(`http://localhost:5000/update-review/${id}`, newReview)
+    axiosSecure.patch(`/update-review/${id}`, newReview)
       .then((res) => {
         if (res.data.modifiedCount) {
           setSpinning(false);
@@ -127,10 +130,21 @@ const MyReviews = () => {
       });
   };
 
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
+
   return (
     <>
+     <Helmet>
+                  <title>My Reviews | Service Scope</title>
+                </Helmet>
       <div className="w-10/12 mx-auto py-10 relative">
-        <h1 className="text-xl font-semibold">My Reviews</h1>
+        <div className="flex items-center justify-between">
+        <h1 className="w-3/12 text-xl font-semibold">My Reviews</h1>
+        {loadData && <PulseLoader size={10} color="#FA6500" />}
+        <div className="w-3/12"></div>
+        </div>
         {
         loading ?
         <div className="pt-4 space-y-3">
@@ -159,6 +173,7 @@ const MyReviews = () => {
               demoLoad={demoLoad}
               setDemoLoad={setDemoLoad}
               key={review._id}
+              setLoadData={setLoadData}
             ></MyReviewCard>
           ))}
         </div>

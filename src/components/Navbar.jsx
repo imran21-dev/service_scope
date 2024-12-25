@@ -4,13 +4,11 @@ import { Button } from "@mui/material";
 import { useContext,  } from "react";
 import { ThemeContext } from "../provider/ContextApi";
 import Swal from "sweetalert2";
-import { signOut } from "firebase/auth";
-import { auth } from "../provider/firebase.config";
 import fakeUser from '../assets/fakeUser.webp'
 import Headroom from "react-headroom";
 
 const Navbar = () => {
-  const { user, processing } = useContext(ThemeContext);
+  const { user, processing, logOut } = useContext(ThemeContext);
   const photo = user?.photoURL
 
 
@@ -36,7 +34,7 @@ const Navbar = () => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        signOut(auth)
+        logOut()
           .then(() => {
             Swal.fire({
               icon: "success",

@@ -12,6 +12,7 @@ import { ThemeContext } from "../provider/ContextApi";
 import Swal from "sweetalert2";
 import googlepng from '../assets/google.png'
 import { useLoadingBar } from "react-top-loading-bar";
+import { Helmet } from "react-helmet-async";
 
 
 const Login = () => {
@@ -134,9 +135,14 @@ const Login = () => {
               });
         })
   }
-
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   return (
     <div>
+       <Helmet>
+                    <title>Login | Service Scope</title>
+                  </Helmet>
       <form onSubmit={handleLogin} className="card-body w-5/12 mx-auto">
         <h1 className="text-2xl font-bold">Welcome Back!</h1>
         <p className="pb-5">Log in to continue your journey.</p>

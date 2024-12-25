@@ -9,6 +9,8 @@ import { CiSearch } from "react-icons/ci";
 import { useLoadingBar } from "react-top-loading-bar";
 import FilterSelector from "../components/FilterSelector";
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const Services = () => {
@@ -19,7 +21,7 @@ const Services = () => {
   const [demoLoad, setDemoLoad] = useState(0)
   const { start, complete } = useLoadingBar({ color: "#FA6500", height: 2 });
   const [selectedCategory, setSelectedCategory] = useState(null)
-
+  const axiosSecure = useAxiosSecure()
   useEffect(() => {
     start()
     setSkeletonTime(true);
@@ -41,14 +43,14 @@ const Services = () => {
     setCross(false)
     start()
     setSkeletonTime(true)
-    axios.get(`http://localhost:5000/filter-services?category=${selectedCategory.label}`)
+    axiosSecure.get(`/filter-services?category=${selectedCategory.label}`)
     .then(res => {
       setAllServices(res.data)
       complete()
       setSkeletonTime(false)
       setFilterClose(false)
     })
-  },[complete, selectedCategory, start])
+  },[axiosSecure, complete, selectedCategory, start])
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -60,7 +62,7 @@ const Services = () => {
     setFilterClose(true)
     start()
     setSkeletonTime(true)
-    axios.get(`http://localhost:5000/search-services/?keyword=${keyword}`)
+    axiosSecure.get(`/search-services/?keyword=${keyword}`)
     .then(res => {
       setSkeletonTime(false)
       complete()
@@ -70,9 +72,15 @@ const Services = () => {
     
   }
 
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
+
   return (
     <div className="w-10/12 mx-auto py-10 z-0 relative">
-      
+      <Helmet>
+              <title>All Services | Service Scope</title>
+            </Helmet>
       <div className="grid grid-cols-3 gap-6 items-center relative ">
           <h1 className=" text-xl font-semibold">All Services {allServices.length}</h1>
 

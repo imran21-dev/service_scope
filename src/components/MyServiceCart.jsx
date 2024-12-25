@@ -5,11 +5,12 @@ import Swal from "sweetalert2";
 import fakeThumb from '../assets/fakeThumb.jpg'
 import { CiShare1 } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 
 const MyServiceCart = ({service,setDemoLoad,demoLoad,handleUpdate,}) => {
   const {category,companyName,description,price,serviceImage,serviceTitle,website,_id,addedDate} = service
-    
+    const axiosSecure = useAxiosSecure()
 
 const handleWebsite = () => {
     window.open(`${website}`, "_blank", "noopener,noreferrer");
@@ -33,7 +34,7 @@ const handleDelete = () => {
         },
       }).then((result) => {
         if (result.isConfirmed) {
-            axios.delete(`http://localhost:5000/delete-service/${_id}`)
+            axiosSecure.delete(`/delete-service/${_id}`)
             .then((res) => {
               if (res.data.deletedCount) {
                 Swal.fire({
