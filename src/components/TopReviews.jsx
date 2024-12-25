@@ -14,7 +14,7 @@ const TopReviews = () => {
 useEffect(()=> {
    
     setSkeletonTime(true)
-    axios.get('http://localhost:5000/popular-reviews')
+    axios.get('https://service-scope-server.vercel.app/popular-reviews')
     .then(res => {
         setTopReviews(res.data)
         setSkeletonTime(false)

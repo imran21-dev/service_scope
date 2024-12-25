@@ -31,7 +31,7 @@ const TopReviewCart = ({ review }) => {
     if (formattedDate.isValid()) {
       setRelativeTime(formattedDate.fromNow());
     } else {
-      console.error("Invalid posted date format.");
+      
       setRelativeTime("Invalid date");
     }
   }, [postedDate]);

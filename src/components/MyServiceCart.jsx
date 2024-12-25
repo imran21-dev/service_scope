@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import PropTypes from "prop-types";
 import { FaLocationArrow } from "react-icons/fa";
 import Swal from "sweetalert2";

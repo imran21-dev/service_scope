@@ -15,7 +15,7 @@ const FeaturedServices = () => {
     start()
     setSkeletonTime(true)
     axios
-      .get("http://localhost:5000/")
+      .get("https://service-scope-server.vercel.app/")
       .then((res) => {
         setFeaturedServices(res.data)
         setSkeletonTime(false)
@@ -26,7 +26,8 @@ const FeaturedServices = () => {
  
 
   return (
-    <div className="w-10/12 mx-auto py-10">
+    <section className="bg-white relative">
+      <div className="w-10/12 mx-auto py-10">
       <h1 className="text-xl font-semibold">Featured Services</h1>
 
 
@@ -48,6 +49,7 @@ const FeaturedServices = () => {
       
      
     </div>
+    </section>
   );
 };
 

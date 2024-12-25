@@ -27,7 +27,7 @@ const Services = () => {
     setSkeletonTime(true);
     setCross(false)
     document.querySelector('#searchInput').value = ''
-    axios.get("http://localhost:5000/all-services").then((res) => {
+    axios.get("https://service-scope-server.vercel.app/all-services").then((res) => {
       setAllServices(res.data);
       complete()
       setSkeletonTime(false);

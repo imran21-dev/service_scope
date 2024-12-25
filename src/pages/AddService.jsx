@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import CustomSelectProps from "../components/CustomSelectProps";
 import { ThemeContext } from "../provider/ContextApi";
-import axios from "axios";
+
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
 import { useLoadingBar } from "react-top-loading-bar";

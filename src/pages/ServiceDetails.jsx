@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { useContext, useEffect, useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { CiShare1 } from "react-icons/ci";

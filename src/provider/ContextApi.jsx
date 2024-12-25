@@ -45,13 +45,13 @@ const ContextApi = ({ children }) => {
       setUser(currentUser);
       if (currentUser?.email) {
         const user = {email : currentUser.email}
-        axios.post('http://localhost:5000/jwt',user, {withCredentials: true})
+        axios.post('https://service-scope-server.vercel.app/jwt',user, {withCredentials: true})
          .then(() => {
           setProcessing(false);
          })
       }
       else{
-        axios.post('http://localhost:5000/logout', {}, {withCredentials: true})
+        axios.post('https://service-scope-server.vercel.app/logout', {}, {withCredentials: true})
         .then(() => {
           setProcessing(false);
         })
@@ -86,10 +86,10 @@ const ContextApi = ({ children }) => {
       email,
     };
 
-    axios.post("http://localhost:5000/add-user", newUser).then(() => {});
+    axios.post("https://service-scope-server.vercel.app/add-user", newUser).then(() => {});
   }, [user]);
 
-  console.log(user);
+
 
   return (
     <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>

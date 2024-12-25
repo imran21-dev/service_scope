@@ -1,4 +1,5 @@
 
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 
@@ -67,4 +68,8 @@ const FilterSelector = ({selectedCategory, setSelectedCategory,}) => {
   );
 };
 
+FilterSelector.propTypes = {
+  selectedCategory : PropTypes.string,
+  setSelectedCategory : PropTypes.func
+}
 export default FilterSelector;

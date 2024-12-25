@@ -15,9 +15,11 @@ import TopReviews from "../components/TopReviews";
 import CountUp from "react-countup";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { motion } from "motion/react"
 import { Helmet } from "react-helmet-async";
-
+import cicle from '../assets/cicle.png'
+import shape from '../assets/shape.png'
+import plant from '../assets/plant.png'
 
 const HomePage = () => {
 
@@ -25,11 +27,11 @@ const HomePage = () => {
   const [allReviews, setAllReviews] = useState(0)
   const [allUser, setAllUser] = useState(0)
   useEffect(()=>{
-    axios.get('http://localhost:5000/all-services')
+    axios.get('https://service-scope-server.vercel.app/all-services')
     .then(res => setAllservices(res.data.length))
-    axios.get('http://localhost:5000/reviews-count')
+    axios.get('https://service-scope-server.vercel.app/reviews-count')
     .then(res => setAllReviews(res.data.length))
-    axios.get('http://localhost:5000/all-users')
+    axios.get('https://service-scope-server.vercel.app/all-users')
     .then(res => setAllUser(res.data.length))
   },[])
 
@@ -42,7 +44,16 @@ const HomePage = () => {
       <Helmet>
         <title>Home | Service Scope</title>
       </Helmet>
-      <section className="relative z-0">
+      <section className="relative z-0 ">
+        <img className="absolute z-10 w-96 animate-spin-slow left-0 -bottom-96" src={cicle} alt="" />
+        
+        <div className=" absolute z-10 left-20 rotate-45 -top-40">
+        <img className=" w-72 animate-spin-slow3" src={plant} alt="" />
+        </div>
+
+        <div className=" origin-center right-32 -top-40 absolute  z-10">
+        <img className=" w-64 animate-spin-slow2  " src={shape} alt="" />
+        </div>
        
         <Swiper
           spaceBetween={30}
@@ -71,7 +82,14 @@ const HomePage = () => {
         </Swiper>
         
       </section>
-       <div className="flex w-10/12 mx-auto justify-center font-['Exo 2']">
+       <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+            duration: 0.4,
+            scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+        }}
+       className="flex w-10/12 mx-auto justify-center font-['Exo 2']">
 
       
        
@@ -102,7 +120,7 @@ const HomePage = () => {
        </div>
        </section>
        
-        </div>   
+        </motion.div>   
       <FeaturedServices></FeaturedServices>
       <TopReviews></TopReviews>
       <MeetOurPartner></MeetOurPartner>

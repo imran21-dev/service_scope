@@ -6,7 +6,7 @@ import { ThemeContext } from "../provider/ContextApi";
 import Swal from "sweetalert2";
 import fakeUser from '../assets/fakeUser.webp'
 import Headroom from "react-headroom";
-
+ 
 const Navbar = () => {
   const { user, processing, logOut } = useContext(ThemeContext);
   const photo = user?.photoURL
@@ -73,7 +73,8 @@ const Navbar = () => {
 
   return (
     <Headroom>
-      <div className="navbar w-10/12 mx-auto bg-white relative z-50">
+     <section className="w-full bg-white">
+     <div className="navbar w-10/12 mx-auto bg-white relative z-50">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -196,6 +197,7 @@ const Navbar = () => {
         )}
       </div>
     </div>
+     </section>
     </Headroom>
   );
 };

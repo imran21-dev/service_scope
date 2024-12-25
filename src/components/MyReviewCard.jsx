@@ -1,5 +1,4 @@
 import { Rating } from "@mui/material";
-import axios from "axios";
 import moment from "moment";
 import PropTypes from "prop-types";
 
