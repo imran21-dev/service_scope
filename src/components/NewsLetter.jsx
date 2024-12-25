@@ -3,7 +3,7 @@ import { LuMail } from "react-icons/lu";
 
 const NewsLetter = () => {
     return (
-        <div className="w-10/12 mx-auto py-10">
+        <div className="w-10/12 mx-auto py-10 mb-20">
             <div className="bg-secondaryTextColor/5 w-max mx-auto  p-4 rounded-badge">
             <LuMail className="text-6xl bg-white text-pColor p-5 rounded-3xl"/>
             </div>

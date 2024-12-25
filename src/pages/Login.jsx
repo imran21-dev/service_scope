@@ -139,11 +139,12 @@ const Login = () => {
     window.scrollTo(0,0)
   },[])
   return (
-    <div>
-       <Helmet>
+    <div className="min-h-screen flex flex-col items-center justify-center">
+     <section className="w-full">
+     <Helmet>
                     <title>Login | Service Scope</title>
                   </Helmet>
-      <form onSubmit={handleLogin} className="card-body w-5/12 mx-auto">
+      <form onSubmit={handleLogin} className="card-body  w-5/12 mx-auto">
         <h1 className="text-2xl font-bold">Welcome Back!</h1>
         <p className="pb-5">Log in to continue your journey.</p>
 
@@ -209,6 +210,8 @@ const Login = () => {
       <div className="divider">or</div>
       <Button onClick={handleSignIn} className="myBtn "><img className="w-4 mr-2" src={googlepng} alt="" /> Google</Button>
       </div>
+     </section>
+
     </div>
   );
 };

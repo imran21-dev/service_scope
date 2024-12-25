@@ -2,7 +2,7 @@
 
 const Slide2 = () => {
     return (
-        <div className="w-full  py-96">
+        <div className="w-full  py-96 bg-pColor/10">
             <h1 className="text-3xl font-bold">Your Voice, Your Impact</h1>
             <p className="py-2">
             Share your experiences and help others discover the best.

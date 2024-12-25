@@ -1,4 +1,3 @@
-
 import { useContext, useEffect, useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 import { CiShare1 } from "react-icons/ci";
@@ -9,12 +8,12 @@ import { useLoaderData } from "react-router-dom";
 import ReviewRating from "../components/ReviewRating";
 import { IoSendSharp } from "react-icons/io5";
 import { ThemeContext } from "../provider/ContextApi";
-import fakeUser  from '../assets/fakeUser.webp'
+import fakeUser from "../assets/fakeUser.webp";
 import ReviewCart from "../components/ReviewCart";
 import toast, { Toaster } from "react-hot-toast";
 import ReviewSkeleton from "../components/ReviewSkeleton";
 import RatingSummary from "../components/RatingSummary";
-import fakeThumb from '../assets/fakeThumb.jpg'
+import fakeThumb from "../assets/fakeThumb.jpg";
 import { ImSpinner9 } from "react-icons/im";
 import { useLoadingBar } from "react-top-loading-bar";
 import { Helmet } from "react-helmet-async";
@@ -28,21 +27,20 @@ const ServiceDetails = () => {
   const [error, setError] = useState(false);
   const [demoLoad, setDemoLoad] = useState(0);
   const [allReviews, setAllReviews] = useState([]);
-  const [loading, setLoading] = useState(true)
-  const [loadingService, setLoadingService] = useState(true)
-  const skeletonCount = [1,1,1,1]
+  const [loading, setLoading] = useState(true);
+  const [loadingService, setLoadingService] = useState(true);
+  const skeletonCount = [1, 1, 1, 1];
   const { start, complete } = useLoadingBar({ color: "#FA6500", height: 2 });
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   useEffect(() => {
-    start()
-    setLoadingService(true)
-    
-    axiosSecure.get(`/single-service?id=${id}`)
-      .then((res) => {
-        setLoadingService(false)
-        setService(res.data)
-        complete()
-      });
+    start();
+    setLoadingService(true);
+
+    axiosSecure.get(`/single-service?id=${id}`).then((res) => {
+      setLoadingService(false);
+      setService(res.data);
+      complete();
+    });
   }, [axiosSecure, complete, id, start]);
 
   const {
@@ -56,13 +54,12 @@ const ServiceDetails = () => {
     publisherName,
     website,
     _id,
-    userEmail
+    userEmail,
   } = service;
 
-
   const handlePhoto = (e) => {
-    e.target.src = fakeUser
-  }
+    e.target.src = fakeUser;
+  };
 
   const handleWebsite = () => {
     window.open(`${website}`, "_blank", "noopener,noreferrer");
@@ -75,36 +72,34 @@ const ServiceDetails = () => {
   const { user } = useContext(ThemeContext);
   const userName = user?.displayName;
   const userPhoto = user?.photoURL;
-  const currentUserEmail = user?.email
+  const currentUserEmail = user?.email;
 
-  useEffect(()=>{
-    setLoading(true)
-    axiosSecure.get(`/all-reviews?id=${id}`)
-    .then(res => {
-      setLoading(false)
-      setAllReviews(res.data)
-    })
-  },[id, demoLoad, axiosSecure])
+  useEffect(() => {
+    setLoading(true);
+    axiosSecure.get(`/all-reviews?id=${id}`).then((res) => {
+      setLoading(false);
+      setAllReviews(res.data);
+    });
+  }, [id, demoLoad, axiosSecure]);
 
-
-const [postLoad, setPostLoad] = useState(false)
+  const [postLoad, setPostLoad] = useState(false);
   const handleFormReview = (e) => {
     e.preventDefault();
-    setPostLoad(true)
+    setPostLoad(true);
     const form = e.target;
     const text = form.text.value;
     const postedDate = new Date();
-    const postedDateString = new Date().toLocaleString('en-GB');
+    const postedDateString = new Date().toLocaleString("en-GB");
 
     if (rating === null) {
       setError(true);
-    setPostLoad(false)
+      setPostLoad(false);
 
       return;
     }
     if (text.trim() === "") {
-    setPostLoad(false)
-      
+      setPostLoad(false);
+
       toast("Please write something", {
         icon: "😒",
         style: {
@@ -128,190 +123,192 @@ const [postLoad, setPostLoad] = useState(false)
       postedDateString,
       companyName,
       website,
-      userEmail : currentUserEmail
+      userEmail: currentUserEmail,
     };
 
-    axiosSecure.post(`/add-review?email=${currentUserEmail}`, review).then((res) => {
-      if (res.data.insertedId) {
-        setDemoLoad(demoLoad + 1)
-    setPostLoad(false)
+    axiosSecure
+      .post(`/add-review?email=${currentUserEmail}`, review)
+      .then((res) => {
+        if (res.data.insertedId) {
+          setDemoLoad(demoLoad + 1);
+          setPostLoad(false);
 
-        toast('Review added!',
-          {
-            icon: '✅',
+          toast("Review added!", {
+            icon: "✅",
             style: {
-              borderRadius: '100px',
-              background: '#FA6500',
-              color: '#fff',
+              borderRadius: "100px",
+              background: "#FA6500",
+              color: "#fff",
             },
-          }
-        );
-      }
-    });
+          });
+        }
+      });
 
-  
     form.reset();
     setRating(null);
   };
   const handleImage = (e) => {
-    e.target.src = fakeThumb
-  }
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+    e.target.src = fakeThumb;
+  };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
+    <div className="min-h-screen flex flex-col items-center justify-start">
     <div className="w-10/12 flex gap-6 mx-auto py-10 relative">
-<Helmet>
+      <Helmet>
         <title>{`Service Details - ${_id} | Service Scope`}</title>
       </Helmet>
-      {
-       loadingService ? 
-    <div className="w-3/5 h-max grid grid-cols-2 gap-4 ">
+      {loadingService ? (
+        <div className="w-3/5 h-max grid grid-cols-2 gap-4 ">
+          <div className="skeleton h-64 w-full"></div>
 
-    <div className="skeleton h-64 w-full"></div>
-
-    <div className="space-y-3 pt-1">
-  <div className="skeleton h-5 w-3/4"></div>
-  <div className="skeleton h-20 w-full"></div>
-    <div className="skeleton h-4 w-28"></div>
-    <div className="skeleton h-7 w-64"></div>
-    <div className="skeleton h-5 w-20"></div>
-    <div className="skeleton h-4 w-40"></div>
-    <div className="skeleton h-4 w-40"></div>
-    </div>
-
-    <div>
-    <div className="skeleton h-72 w-full mb-3"></div>
-    <div className="skeleton h-20 w-full"></div>
-    </div>
-
-    <div className="skeleton h-28 w-full"></div>
-
-
-
-    </div> :
-
-      <section className="w-3/5 h-max grid grid-cols-2 gap-7">
-        <img
-          className="w-full h-64 object-cover rounded-badge border-2 border-pColor/20"
-          onError={handleImage}
-          src={serviceImage}
-          alt=""
-        />
-        <div className="w-full">
-          <h1 className="text-2xl font-bold pt-1">{serviceTitle}</h1>
-          <p className="py-2">{description}</p>
-          <h2 className="font-medium">Total Reviews ({allReviews ? allReviews.length : '0'})</h2>
-          <div className="flex items-center py-2 gap-1">
-            <h2 className="flex items-center font-medium">
-              Category <IoMdArrowDropright />
-            </h2>
-            <h2 className="font-medium capitalize bg-pColor/5 text-pColor border border-pColor rounded-full px-3 text-sm  py-1 w-max">
-              {category}
-            </h2>
+          <div className="space-y-3 pt-1">
+            <div className="skeleton h-5 w-3/4"></div>
+            <div className="skeleton h-20 w-full"></div>
+            <div className="skeleton h-4 w-28"></div>
+            <div className="skeleton h-7 w-64"></div>
+            <div className="skeleton h-5 w-20"></div>
+            <div className="skeleton h-4 w-40"></div>
+            <div className="skeleton h-4 w-40"></div>
           </div>
-          <h2 className="text-lg font-semibold">Price: ${price}</h2>
-          <h2 className="text-sm font-medium py-2">Added on : {addedDate}</h2>
-          <h2 className="text-sm font-medium flex items-center gap-1">Publisher : {publisherName ? publisherName : 'Unavailable'} {currentUserEmail === userEmail && <span className="bg-pColor text-xs py-[1px] text-white rounded-full px-2 flex w-max">me</span>}</h2>
-        </div>
-     
-       <div>
-         <RatingSummary allReviews={allReviews}></RatingSummary>
 
-       <div
-          onClick={handleWebsite}
-          className="border hover:bg-pColor/5 cursor-pointer w-full h-max border-pColor/20 p-4 rounded-2xl flex items-center justify-between"
-        >
           <div>
-            <h2 className="flex items-center gap-2 text-pColor font-medium">
-              <CiShare1 />
-              {companyName}
+            <div className="skeleton h-72 w-full mb-3"></div>
+            <div className="skeleton h-20 w-full"></div>
+          </div>
+
+          <div className="skeleton h-28 w-full"></div>
+        </div>
+      ) : (
+        <section className="w-3/5 h-max grid grid-cols-2 gap-7">
+          <img
+            className="w-full h-64 object-cover rounded-badge border-2 border-pColor/20"
+            onError={handleImage}
+            src={serviceImage}
+            alt=""
+          />
+          <div className="w-full">
+            <h1 className="text-2xl font-bold pt-1">{serviceTitle}</h1>
+            <p className="py-2">{description}</p>
+            <h2 className="font-medium">
+              Total Reviews ({allReviews ? allReviews.length : "0"})
             </h2>
-            <h3 className="text-sm pt-1 text-secondaryTextColor/70">
-              Visit this website
-            </h3>
+            <div className="flex items-center py-2 gap-1">
+              <h2 className="flex items-center font-medium">
+                Category <IoMdArrowDropright />
+              </h2>
+              <h2 className="font-medium capitalize bg-pColor/5 text-pColor border border-pColor rounded-full px-3 text-sm  py-1 w-max">
+                {category}
+              </h2>
+            </div>
+            <h2 className="text-lg font-semibold">Price: ${price}</h2>
+            <h2 className="text-sm font-medium py-2">Added on : {addedDate}</h2>
+            <h2 className="text-sm font-medium flex items-center gap-1">
+              Publisher : {publisherName ? publisherName : "Unavailable"}{" "}
+              {currentUserEmail === userEmail && (
+                <span className="bg-pColor text-xs py-[1px] text-white rounded-full px-2 flex w-max">
+                  me
+                </span>
+              )}
+            </h2>
           </div>
-          <BsArrowRight className="text-xl text-pColor" />
-        </div>
-       </div>
 
-        
-        <div className="w-full border h-max p-4 rounded-2xl">
-          <div className="flex items-center justify-between">
-           <div className="flex items-center pb-2 gap-2">
-            <img className="w-6 h-6 object-cover rounded-full" onError={handlePhoto} src={userPhoto} alt="" />
-           <h1
-              onClick={handleReviewForm}
-              className="text-pColor font-semibold cursor-pointer  flex items-center gap-1"
+          <div>
+            <RatingSummary allReviews={allReviews}></RatingSummary>
+
+            <div
+              onClick={handleWebsite}
+              className="border hover:bg-pColor/5 cursor-pointer w-full h-max border-pColor/20 p-4 rounded-2xl flex items-center justify-between"
             >
-              {write ? "Cancel" : "Write a review"}
-              {write ? <MdCancel /> : <FaPenNib className="text-sm" />}
-            </h1>
-           </div>
-
-            <ReviewRating
-              rating={rating}
-              setRating={setRating}
-              error={error}
-              setError={setError}
-            ></ReviewRating>
+              <div>
+                <h2 className="flex items-center gap-2 text-pColor font-medium">
+                  <CiShare1 />
+                  {companyName}
+                </h2>
+                <h3 className="text-sm pt-1 text-secondaryTextColor/70">
+                  Visit this website
+                </h3>
+              </div>
+              <BsArrowRight className="text-xl text-pColor" />
+            </div>
           </div>
 
-          <form onSubmit={handleFormReview}>
-            <textarea
-              required
-              rows="10"
-              name="text"
-              className={`custom-scrollbar duration-150 resize-none  w-full outline-transparent  ${
-                write ? "h-64" : "h-0 "
-              }`}
-              placeholder="Write your review here... Share your experience, thoughts, or feedback about the service!"
-            ></textarea>
-            {write && (
-              <button className="btn rounded-full min-h-max h-max py-3 text-white bg-pColor">
-               {postLoad && <ImSpinner9 className="animate-spin" />} Add Review <IoSendSharp />
-              </button>
-            )}
-          </form>
+          <div className="w-full border h-max p-4 rounded-2xl">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center pb-2 gap-2">
+                <img
+                  className="w-6 h-6 object-cover rounded-full"
+                  onError={handlePhoto}
+                  src={userPhoto}
+                  alt=""
+                />
+                <h1
+                  onClick={handleReviewForm}
+                  className="text-pColor font-semibold cursor-pointer  flex items-center gap-1"
+                >
+                  {write ? "Cancel" : "Write a review"}
+                  {write ? <MdCancel /> : <FaPenNib className="text-sm" />}
+                </h1>
+              </div>
+
+              <ReviewRating
+                rating={rating}
+                setRating={setRating}
+                error={error}
+                setError={setError}
+              ></ReviewRating>
+            </div>
+
+            <form onSubmit={handleFormReview}>
+              <textarea
+                required
+                rows="10"
+                name="text"
+                className={`custom-scrollbar duration-150 resize-none  w-full outline-transparent  ${
+                  write ? "h-64" : "h-0 "
+                }`}
+                placeholder="Write your review here... Share your experience, thoughts, or feedback about the service!"
+              ></textarea>
+              {write && (
+                <button className="btn rounded-full min-h-max h-max py-3 text-white bg-pColor">
+                  {postLoad && <ImSpinner9 className="animate-spin" />} Add
+                  Review <IoSendSharp />
+                </button>
+              )}
+            </form>
+          </div>
+        </section>
+      )}
+
+      {loading ? (
+        <div className="flex w-2/5 flex-col  gap-2">
+          {skeletonCount.map((skeleton, idx) => (
+            <ReviewSkeleton key={idx}></ReviewSkeleton>
+          ))}
         </div>
-    
-       
-      </section>
-
-      }
-
-
-
-
-       {
-        loading ? <div className="flex w-2/5 flex-col  gap-2">
-          {
-          skeletonCount.map((skeleton, idx) => <ReviewSkeleton key={idx}></ReviewSkeleton>)
-          
-          }
-        </div> : 
+      ) : (
         <section className="w-2/5 h-[750px]  custom-scrollbar  overflow-y-scroll">
-        <div className="">
+          <div className="">
+            {allReviews.length < 1 ? (
+              <h2 className="text-lg w-full h-[750px] bg-gray-100/50 rounded-2xl font-medium flex justify-center items-center ">
+                No reviews yet—your feedback could be the first to help others!
+              </h2>
+            ) : (
+              <div className="flex flex-col gap-3 px-3">
+                {allReviews.map((review) => (
+                  <ReviewCart review={review} key={review._id}></ReviewCart>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
-        {
-         allReviews.length < 1 ?<h2 className="text-lg w-full h-[750px] bg-gray-100/50 rounded-2xl font-medium flex justify-center items-center ">No reviews yet—your feedback could be the first to help others!</h2> : <div className="flex flex-col gap-3 px-3">
-          {
-          allReviews.map(review => <ReviewCart review={review} key={review._id}></ReviewCart>)
-          }
-         </div>
-         }
-        </div>
-      </section>
-       }
+      <Toaster position="top-center" reverseOrder={false} />
+    </div>
 
-      
-
-
-      <Toaster 
-      position="top-center"
-      reverseOrder={false}
-      />
     </div>
   );
 };

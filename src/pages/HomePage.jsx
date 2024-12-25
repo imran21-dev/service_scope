@@ -66,7 +66,7 @@ const HomePage = () => {
           pagination={false}
           navigation={true}
           modules={[Autoplay, Pagination, Navigation]}
-          className="mySwiper"
+          className="mySwiper bg-pColor/10 "
         >
           <SwiperSlide>
             <Slide1></Slide1>
@@ -82,6 +82,7 @@ const HomePage = () => {
         </Swiper>
         
       </section>
+       <section className="bg-pColor/10 pb-2">
        <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -89,25 +90,25 @@ const HomePage = () => {
             duration: 0.4,
             scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
         }}
-       className="flex w-10/12 mx-auto justify-center font-['Exo 2']">
+       className="flex  mx-auto justify-center font-['Exo 2']">
 
       
        
-       <section className=" px-10  w-44 border-r  pb-5 flex-col flex items-center justify-between">
+       <section className=" px-10  w-44 border-r border-[#753a88]/20  pb-5 flex-col flex items-center justify-between">
         
 
        <div >
-        <h1 className="text-5xl bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allUser} ></CountUp></h1>
-        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent">Users</h1>
+        <h1 className="text-5xl bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allUser} ></CountUp></h1>
+        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent">Users</h1>
        </div>
        </section>
 
-       <section className=" px-10 w-44 border-r pb-5 flex-col flex items-center justify-between">
+       <section className=" px-10 w-44 border-r border-[#753a88]/20 pb-5 flex-col flex items-center justify-between">
         
 
        <div >
-        <h1 className="text-5xl bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allServices} ></CountUp></h1>
-        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent">services</h1>
+        <h1 className="text-5xl bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allServices} ></CountUp></h1>
+        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent">services</h1>
        </div>
        </section>
 
@@ -115,12 +116,13 @@ const HomePage = () => {
        
 
        <div >
-        <h1 className="text-5xl bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allReviews} ></CountUp></h1>
-        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-purple-500 to-pColor bg-clip-text text-transparent">Reviews</h1>
+        <h1 className="text-5xl bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allReviews} ></CountUp></h1>
+        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent">Reviews</h1>
        </div>
        </section>
        
-        </motion.div>   
+        </motion.div>  
+        </section> 
       <FeaturedServices></FeaturedServices>
       <TopReviews></TopReviews>
       <MeetOurPartner></MeetOurPartner>

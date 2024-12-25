@@ -131,7 +131,8 @@ const Register = () => {
     window.scrollTo(0,0)
   },[])
   return (
-    <div className="pt-20 relative">
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      <div className="w-full relative">
        <Helmet>
                     <title>Register | Service Scope</title>
                   </Helmet>
@@ -252,6 +253,7 @@ const Register = () => {
           </Link>
         </h1>
       </form>
+    </div>
     </div>
   );
 };

@@ -103,7 +103,9 @@ const AddService = () => {
   },[])
 
   return (
-    <div className="w-10/12 mx-auto py-10 text-center">
+    <div className="min-h-screen flex flex-col items-center justify-start">
+
+    <div className="w-10/12 pt-10 mx-auto text-center">
        <Helmet>
                     <title>Add Service | Service Scope</title>
                   </Helmet>
@@ -219,6 +221,7 @@ const AddService = () => {
         </div>
       </form>
       <Toaster position="top-center" reverseOrder={false} />
+    </div>
     </div>
   );
 };

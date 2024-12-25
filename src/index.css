@@ -23,6 +23,10 @@ transition: .2s ease-in-out;
  border-bottom: 2px solid #FA6500;
 }
 
+.navbar-end .active {
+  @apply w-max    !bg-pColor/10 !shadow-none !text-white !rounded-full !capitalize
+}
+
 .myBtn{
 @apply w-max !px-6 !bg-black/5 !text-black hover:!bg-pColor !shadow-none hover:!text-white !rounded-full !capitalize
 }
@@ -35,7 +39,7 @@ transition: .2s ease-in-out;
   width: 10px;
 }
 ::-webkit-scrollbar-thumb{
-  background-color: #fa640059;
+  background-color: #78787859;
   border-radius: 50px;
 }
 ::-webkit-scrollbar-track{

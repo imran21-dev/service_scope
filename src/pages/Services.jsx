@@ -77,6 +77,8 @@ const Services = () => {
   },[])
 
   return (
+    <div className="min-h-screen flex flex-col items-center justify-start">
+
     <div className="w-10/12 mx-auto py-10 z-0 relative">
       <Helmet>
               <title>All Services | Service Scope</title>
@@ -144,6 +146,7 @@ const Services = () => {
           ))}
         </div>
       )}
+    </div>
     </div>
   );
 };

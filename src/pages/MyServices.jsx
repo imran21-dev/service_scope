@@ -208,8 +208,7 @@ const MyServices = () => {
   },[])
 
   return (
-  
-
+  <div className="min-h-screen flex flex-col items-center justify-start">
     <>
      <Helmet>
                   <title>My Services | Service Scope</title>
@@ -491,6 +490,9 @@ const MyServices = () => {
       )}
       <Toaster position="top-center" reverseOrder={false} />
     </>
+
+  </div>
+
    
   );
 };

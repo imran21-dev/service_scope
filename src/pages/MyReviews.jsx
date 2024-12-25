@@ -135,6 +135,8 @@ const MyReviews = () => {
   },[])
 
   return (
+    <div className="min-h-screen flex flex-col items-center justify-start">
+
     <>
      <Helmet>
                   <title>My Reviews | Service Scope</title>
@@ -241,6 +243,7 @@ const MyReviews = () => {
       )}
       <Toaster position="top-center" reverseOrder={false} />
     </>
+    </div>
   );
 };
 

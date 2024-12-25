@@ -128,7 +128,9 @@ const Navbar = () => {
           <NavLink to="/services" className="navLink">
             Services
           </NavLink>
-          <NavLink to="/add-service" className="navLink">
+          {
+           user && <>
+           <NavLink to="/add-service" className="navLink">
             Add Service
           </NavLink>
           <NavLink to="/my-services" className="navLink">
@@ -137,6 +139,8 @@ const Navbar = () => {
           <NavLink to="/my-reviews" className="navLink">
             My Reviews
           </NavLink>
+           </>
+          }
         </ul>
       </div>
       <div className="navbar-end space-x-2">
@@ -176,21 +180,21 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Link to="/login">
+                <NavLink to="/login">
                   {" "}
                   <Button
                     variant="contained"
-                    className="mt-1 w-max !px-6 !bg-pColor hover:!bg-pColor !shadow-none hover:!text-white !rounded-full !capitalize"
+                    className="mt-1 myBtn"
                   >
                     Login{" "}
                   </Button>
-                </Link>
+                </NavLink>
 
-                <Link to="/register">
+                <NavLink to="/register">
                   <Button variant="contained" className="mt-1 myBtn">
                     Register{" "}
                   </Button>
-                </Link>
+                </NavLink>
               </>
             )}
           </>

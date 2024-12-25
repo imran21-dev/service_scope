@@ -45,7 +45,7 @@ const FeaturedServices = () => {
       
       }
 
-     <Link to='/services' className="btn rounded-full bg-pColor text-white px-8 border-none">Show all Services</Link>
+     <Link to='/services' className="btn rounded-full min-h-max h-max py-3 bg-pColor text-white px-8 border-none">Show all Services</Link>
       
      
     </div>

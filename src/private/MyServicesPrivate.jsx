@@ -10,7 +10,9 @@ const MyServicesPrivate = ({children}) => {
     const {pathname} = useLocation()
 
     if (processing) {
-        return  <div className="w-full absolute top-0 h-screen flex justify-center items-center"><ClimbingBoxLoader color="#FA6500"/></div>
+        return  <div className="h-screen w-full">
+        <div className="w-full absolute top-0 h-screen flex justify-center items-center"><ClimbingBoxLoader color="#FA6500"/></div>
+    </div>
     }
 
     if (user) {
