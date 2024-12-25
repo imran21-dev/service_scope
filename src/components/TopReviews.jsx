@@ -4,18 +4,21 @@ import TopReviewCart from "./TopReviewCart";
 import ReviewSkeleton from "./ReviewSkeleton";
 
 
+
 const TopReviews = () => {
     const [topReviews, setTopReviews] = useState([])
     const skeletonCount = [1,1,1,1,1,1,1,1,1,1]
   const [skeletonTime, setSkeletonTime] = useState(true)
-
+  
 
 useEffect(()=> {
+   
     setSkeletonTime(true)
     axios.get('http://localhost:5000/popular-reviews')
     .then(res => {
         setTopReviews(res.data)
         setSkeletonTime(false)
+        
     })
 },[])
 

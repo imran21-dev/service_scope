@@ -1,12 +1,23 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import CustomSelectProps from "../components/CustomSelectProps";
 import { ThemeContext } from "../provider/ContextApi";
 import axios from "axios";
 import Swal from "sweetalert2";
+import toast, { Toaster } from "react-hot-toast";
+import { useLoadingBar } from "react-top-loading-bar";
 
 const AddService = () => {
   const [loading, setLoading] = useState(false);
+  const { start, complete } = useLoadingBar({ color: "#FA6500", height: 2 });
+
+  useEffect(()=>{
+  start()
+  setTimeout(()=>{
+    complete()
+
+  }, 500)
+  },[complete, start])
 
   const { user } = useContext(ThemeContext);
   const handleAddService = (e) => {
@@ -19,6 +30,48 @@ const AddService = () => {
     formData.addedDate = addedDate;
     formData.userEmail = userEmail;
     formData.publisherName = publisherName;
+
+    const {serviceTitle,description,companyName} = formData
+
+    if (serviceTitle.trim("") === "") {
+      setLoading(false)
+      toast("Please add a Service Title", {
+        icon: "😘",
+        style: {
+          borderRadius: "100px",
+          background: "#ff0000",
+          color: "#fff",
+        },
+      });
+      return
+    }
+    if (companyName.trim("") === "") {
+      setLoading(false)
+      toast("Please add a Company", {
+        icon: "😗",
+        style: {
+          borderRadius: "100px",
+          background: "#ff0000",
+          color: "#fff",
+        },
+      });
+      return
+    }
+    if (description.trim("") === "") {
+      setLoading(false)
+      toast("Please add a Description", {
+        icon: "😒",
+        style: {
+          borderRadius: "100px",
+          background: "#ff0000",
+          color: "#fff",
+        },
+      });
+      return
+    }
+  
+
+  
 
     axios.post("http://localhost:5000/add-service", formData).then((res) => {
       if (res.data.insertedId) {
@@ -156,6 +209,7 @@ const AddService = () => {
           </button>
         </div>
       </form>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   );
 };

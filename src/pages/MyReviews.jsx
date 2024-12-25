@@ -2,33 +2,223 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../provider/ContextApi";
 import MyReviewCard from "../components/MyReviewCard";
-
+import { motion } from "motion/react";
+import { ImSpinner9 } from "react-icons/im";
+import { IconButton, Rating } from "@mui/material";
+import { IoMdClose } from "react-icons/io";
+import toast, { Toaster } from "react-hot-toast";
+import Swal from "sweetalert2";
+import { useLoadingBar } from "react-top-loading-bar";
 
 const MyReviews = () => {
+  const { user, setBlockScroll } = useContext(ThemeContext);
+  const userMail = user?.email;
+  const [myReviews, setMyReviews] = useState([]);
+  const [demoLoad, setDemoLoad] = useState(0);
+  const [loading, setLoading] = useState(true)
+  const { start, complete } = useLoadingBar({ color: "#FA6500", height: 2 });
 
-    const {user} = useContext(ThemeContext)
-    const userMail = user?.email
-    const [myReviews, setMyReviews] = useState([])
-    const [demoLoad, setDemoLoad] = useState(0)
+  useEffect(() => {
+    start()
+    setLoading(true)
+    axios
+      .get(`http://localhost:5000/my-reviews?email=${userMail}`)
+      .then((res) => {
+        setMyReviews(res.data);
+        setLoading(false)
+        complete()
+      });
+  }, [userMail, demoLoad, start, complete]);
 
-    useEffect(()=> {
-        axios.get(`http://localhost:5000/my-reviews?email=${userMail}`)
-        .then(res => {
-            setMyReviews(res.data)
-        })
-    },[userMail,demoLoad])
-    
-  
-    return (
-        <div className="w-10/12 mx-auto py-10 relative">
-           <h1 className="text-xl font-semibold">My Reviews</h1>
-           <div className="space-y-3 pt-4">
-            {
-            myReviews.map(review => <MyReviewCard review={review} demoLoad={demoLoad} setDemoLoad={setDemoLoad} key={review._id}></MyReviewCard>)
-            }
-           </div>
+  const [id, setId] = useState(null);
+  const [rating, setRating] = useState(null);
+  const [defaultRating, setDefaultRating] = useState(null);
+  const [text, setText] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [spinning, setSpinning] = useState(false);
+
+  const handleUpdate = (id) => {
+    axios.get(`http://localhost:5000/single-review?id=${id}`).then((res) => {
+      setRating(res.data.ratingStar);
+      setDefaultRating(res.data.ratingStar);
+      setText(res.data.text);
+      setId(res.data._id);
+      setBlockScroll(true)
+      setIsVisible(true);
+    });
+  };
+
+  const handleUpdateReviewData = (e) => {
+    e.preventDefault();
+    setSpinning(true);
+    const newReviewText = e.target.text.value;
+    const newReview = {
+      newReviewText,
+      rating,
+    };
+
+    if (newReviewText.trim("") === "") {
+      toast("Invalid review text", {
+        icon: "👀",
+        style: {
+          borderRadius: "100px",
+          background: "#ff0000",
+          color: "#fff",
+        },
+      });
+      setSpinning(false);
+
+      return;
+    }
+
+    if (newReviewText === text && rating === defaultRating) {
+      toast("Change something to update", {
+        icon: "😘",
+        style: {
+          borderRadius: "100px",
+          background: "#ffff",
+          color: "#000",
+        },
+      });
+      setSpinning(false);
+
+      return;
+    }
+    if (rating === null) {
+      toast("Please add rating star", {
+        icon: "☹️",
+        style: {
+          borderRadius: "100px",
+          background: "#ffff",
+          color: "#000",
+        },
+      });
+      setSpinning(false);
+
+      return;
+    }
+
+    axios
+      .patch(`http://localhost:5000/update-review/${id}`, newReview)
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          setSpinning(false);
+          setIsVisible(false)
+          setBlockScroll(false)
+          Swal.fire({
+            icon: "success",
+            title: "Updated!",
+            text: "Review information updated successfully!",
+            confirmButtonText: "Okay",
+            scrollbarPadding: false,
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+              title: "text-xl  md:text-3xl font-bold ",
+              text: "text-3xl ",
+              popup: "text-black rounded-3xl outline outline-[#16A34A]",
+              confirmButton: "bg-[#16A34A] rounded-full py-[10px] px-[30px]",
+            },
+          });
+          setDemoLoad(demoLoad + 1)
+        }
+      });
+  };
+
+  return (
+    <>
+      <div className="w-10/12 mx-auto py-10 relative">
+        <h1 className="text-xl font-semibold">My Reviews</h1>
+        {
+        loading ?
+        <div className="pt-4 space-y-3">
+        
+        <div className="skeleton h-28 w-full"></div>
+        <div className="skeleton h-28 w-full"></div>
+        <div className="skeleton h-28 w-full"></div>
+        <div className="skeleton h-28 w-full"></div>
+        <div className="skeleton h-28 w-full"></div>
+        <div className="skeleton h-28 w-full"></div>
         </div>
-    );
+        
+        :
+
+        <div className="space-y-3 pt-4">
+          {myReviews.map((review) => (
+            <MyReviewCard
+              handleUpdate={handleUpdate}
+              review={review}
+              demoLoad={demoLoad}
+              setDemoLoad={setDemoLoad}
+              key={review._id}
+            ></MyReviewCard>
+          ))}
+        </div>
+        }
+
+
+      </div>
+
+
+      {isVisible && (
+        <div className="w-full h-screen bg-black/30  absolute flex items-center justify-center top-0 z-30 ">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }} // Start hidden
+            animate={{ opacity: 1, scale: 1 }} // Animate to visible
+            exit={{ opacity: 0, y: -50 }} // Exit animation
+            transition={{ duration: 0.2 }}
+            className="w-2/4  border bg-white rounded-2xl p-4 shadow-lg flex flex-col "
+          >
+            <div className="text-right border-b pb-3">
+              <IconButton
+                onClick={() => {
+                  setIsVisible(false)
+                  setBlockScroll(false)
+                }}
+                aria-label="delete"
+              >
+                <IoMdClose />
+              </IconButton>
+            </div>
+
+            <h1 className="text-xl font-semibold py-3">
+              Update Review Information
+            </h1>
+
+            <form onSubmit={handleUpdateReviewData}>
+              <h2 className="font-medium py-1">Change rating star</h2>
+              <div className="flex items-center gap-2">
+                <Rating
+                  onChange={(event, newValue) => {
+                    setRating(newValue);
+                  }}
+                  name="half-rating"
+                  value={rating}
+                  precision={1}
+                />
+                <span>({rating})</span>
+              </div>
+
+              <h2 className="font-medium py-1">Change review </h2>
+              <textarea
+                name="text"
+                placeholder={text}
+                defaultValue={text}
+                rows="10"
+                className="border w-full rounded-xl outline-transparent focus:outline-none resize-none p-3"
+              ></textarea>
+
+              <button className="btn bg-pColor w-full rounded-full border-none min-h-max h-max py-3 text-white mt-4 mb-4">
+                {spinning && <ImSpinner9 className="animate-spin" />}
+                Update
+              </button>
+            </form>
+          </motion.div>
+        </div>
+      )}
+      <Toaster position="top-center" reverseOrder={false} />
+    </>
+  );
 };
 
 export default MyReviews;

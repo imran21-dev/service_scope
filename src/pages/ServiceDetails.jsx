@@ -14,7 +14,9 @@ import ReviewCart from "../components/ReviewCart";
 import toast, { Toaster } from "react-hot-toast";
 import ReviewSkeleton from "../components/ReviewSkeleton";
 import RatingSummary from "../components/RatingSummary";
-
+import fakeThumb from '../assets/fakeThumb.jpg'
+import { ImSpinner9 } from "react-icons/im";
+import { useLoadingBar } from "react-top-loading-bar";
 
 const ServiceDetails = () => {
   const { id } = useLoaderData();
@@ -27,16 +29,19 @@ const ServiceDetails = () => {
   const [loading, setLoading] = useState(true)
   const [loadingService, setLoadingService] = useState(true)
   const skeletonCount = [1,1,1,1]
+  const { start, complete } = useLoadingBar({ color: "#FA6500", height: 2 });
 
   useEffect(() => {
+    start()
     setLoadingService(true)
     axios
       .get(`http://localhost:5000/single-service?id=${id}`)
       .then((res) => {
         setLoadingService(false)
         setService(res.data)
+        complete()
       });
-  }, [id]);
+  }, [complete, id, start]);
 
   const {
     addedDate,
@@ -49,6 +54,7 @@ const ServiceDetails = () => {
     publisherName,
     website,
     _id,
+    userEmail
   } = service;
 
 
@@ -67,7 +73,7 @@ const ServiceDetails = () => {
   const { user } = useContext(ThemeContext);
   const userName = user?.displayName;
   const userPhoto = user?.photoURL;
-  const userEmail = user?.email
+  const currentUserEmail = user?.email
 
   useEffect(()=>{
     setLoading(true)
@@ -79,9 +85,10 @@ const ServiceDetails = () => {
   },[id, demoLoad])
 
 
-
+const [postLoad, setPostLoad] = useState(false)
   const handleFormReview = (e) => {
     e.preventDefault();
+    setPostLoad(true)
     const form = e.target;
     const text = form.text.value;
     const postedDate = new Date();
@@ -89,9 +96,21 @@ const ServiceDetails = () => {
 
     if (rating === null) {
       setError(true);
+    setPostLoad(false)
+
       return;
     }
     if (text.trim() === "") {
+    setPostLoad(false)
+      
+      toast("Please write something", {
+        icon: "😒",
+        style: {
+          borderRadius: "100px",
+          background: "#ff0000",
+          color: "#fff",
+        },
+      });
       return;
     }
 
@@ -107,12 +126,14 @@ const ServiceDetails = () => {
       postedDateString,
       companyName,
       website,
-      userEmail
+      userEmail : currentUserEmail
     };
 
     axios.post("http://localhost:5000/add-review", review).then((res) => {
       if (res.data.insertedId) {
         setDemoLoad(demoLoad + 1)
+    setPostLoad(false)
+
         toast('Review added!',
           {
             icon: '✅',
@@ -130,6 +151,9 @@ const ServiceDetails = () => {
     form.reset();
     setRating(null);
   };
+  const handleImage = (e) => {
+    e.target.src = fakeThumb
+  }
 
   return (
     <div className="w-10/12 flex gap-6 mx-auto py-10 relative">
@@ -164,6 +188,7 @@ const ServiceDetails = () => {
       <section className="w-3/5 h-max grid grid-cols-2 gap-7">
         <img
           className="w-full h-64 object-cover rounded-badge border-2 border-pColor/20"
+          onError={handleImage}
           src={serviceImage}
           alt=""
         />
@@ -175,13 +200,13 @@ const ServiceDetails = () => {
             <h2 className="flex items-center font-medium">
               Category <IoMdArrowDropright />
             </h2>
-            <h2 className="font-medium capitalize bg-pColor/20 text-pColor border border-pColor rounded-full px-3 text-sm  py-1 w-max">
+            <h2 className="font-medium capitalize bg-pColor/5 text-pColor border border-pColor rounded-full px-3 text-sm  py-1 w-max">
               {category}
             </h2>
           </div>
           <h2 className="text-lg font-semibold">Price: ${price}</h2>
           <h2 className="text-sm font-medium py-2">Added on : {addedDate}</h2>
-          <h2 className="text-sm font-medium ">Publisher : {publisherName ? publisherName : 'Unavailable'}</h2>
+          <h2 className="text-sm font-medium flex items-center gap-1">Publisher : {publisherName ? publisherName : 'Unavailable'} {currentUserEmail === userEmail && <span className="bg-pColor text-xs py-[1px] text-white rounded-full px-2 flex w-max">me</span>}</h2>
         </div>
      
        <div>
@@ -238,7 +263,7 @@ const ServiceDetails = () => {
             ></textarea>
             {write && (
               <button className="btn rounded-full min-h-max h-max py-3 text-white bg-pColor">
-                Add Review <IoSendSharp />
+               {postLoad && <ImSpinner9 className="animate-spin" />} Add Review <IoSendSharp />
               </button>
             )}
           </form>

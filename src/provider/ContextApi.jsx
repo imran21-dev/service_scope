@@ -9,6 +9,8 @@ const ContextApi = ({children}) => {
   const [processing, setProcessing] = useState(true)
   const [user, setUser] = useState(null)
 
+  const [blockScroll, setBlockScroll] = useState(false)
+
   const registration = (email, password) => {
     setProcessing(true)
     return createUserWithEmailAndPassword(auth, email, password)
@@ -40,7 +42,8 @@ const ContextApi = ({children}) => {
    user,
    login,
    GoogleSignIn,
-   processing
+   processing,
+   blockScroll, setBlockScroll
    }
    console.log(user)
 

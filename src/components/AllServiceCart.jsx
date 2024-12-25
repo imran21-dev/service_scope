@@ -3,17 +3,21 @@ import PropTypes from "prop-types";
 import { Button } from "@mui/material";
 import { IoMdArrowDropright } from "react-icons/io";
 import { Link } from "react-router-dom";
+import fakeThumb from '../assets/fakeThumb.jpg'
 
 const AllServiceCart = ({service}) => {
     const {price,serviceImage,serviceTitle,description,category,_id} = service
-   
+    const handleImage = (e) => {
+      e.target.src = fakeThumb
+    }
     return (
         <div className="card hover: duration-200 rounded-3xl  border border-secondaryTextColor/5">
         <figure className="p-5">
           <img
           className="w-full object-cover h-52 rounded-2xl"
+          onError={handleImage}
             src={serviceImage}
-            alt="Shoes" />
+            alt="" />
         </figure>
         <div className="card-body px-5 pt-0 pb-5">
           <h2 className="text-xl font-bold truncate">{serviceTitle}</h2>

@@ -19,6 +19,8 @@ import ServiceDetailsPrivate from './private/ServiceDetailsPrivate.jsx';
 import ServiceDetails from './pages/ServiceDetails.jsx';
 import MyReviewsPrivate from './private/MyReviewsPrivate.jsx';
 import MyReviews from './pages/MyReviews.jsx';
+import MyServicesPrivate from './private/MyServicesPrivate.jsx';
+import MyServices from './pages/MyServices.jsx';
 
 
 const router = createBrowserRouter([
@@ -54,6 +56,10 @@ const router = createBrowserRouter([
      {
       path: '/my-reviews',
       element: <MyReviewsPrivate><MyReviews></MyReviews></MyReviewsPrivate>
+     },
+     {
+      path: '/my-services',
+      element:<MyServicesPrivate><MyServices></MyServices></MyServicesPrivate>
      }
     ]
   },

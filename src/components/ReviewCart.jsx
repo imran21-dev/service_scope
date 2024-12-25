@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { BsArrowUpRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import fakeUser from "../assets/fakeUser.webp";
+import fakeThumb from '../assets/fakeThumb.jpg'
 
 const ReviewCart = ({ review }) => {
   const {
@@ -16,7 +17,8 @@ const ReviewCart = ({ review }) => {
     userPhoto,
     postedDateString,
     companyName,
-    website
+    website,
+    edited
   } = review;
   
   const [relativeTime, setRelativeTime] = useState("");
@@ -39,7 +41,9 @@ const ReviewCart = ({ review }) => {
   const handleVisitWebsite = () => {
     window.open(`${website}`, "_blank", "noopener,noreferrer");
   }
-
+  const handleImage = (e) => {
+    e.target.src = fakeThumb
+  }
   return (
     <div className="border w-full rounded-2xl overflow-hidden">
       <div className="flex items-center gap-3 px-3 pt-3 pb-2 ">
@@ -64,10 +68,12 @@ const ReviewCart = ({ review }) => {
         </Tooltip>
       </div>
       <hr className="mx-5" />
+      {edited && <h2 className="text-xs mx-3 mt-3 text-white font-medium bg-pColor  px-2 py-[1px] rounded-full w-max">Edited</h2>}
       <p className=" px-3 py-3  ">{text}</p>
       <Link className="flex items-center gap-3 cursor-pointer py-2 px-3 border-t hover:bg-secondaryTextColor/5">
         <img
           className="w-7 h-7 border border-pColor rounded-full object-cover"
+          onError={handleImage}
           src={serviceLogo}
           alt=""
         />

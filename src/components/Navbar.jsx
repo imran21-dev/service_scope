@@ -132,6 +132,9 @@ const Navbar = () => {
           <NavLink to="/add-service" className="navLink">
             Add Service
           </NavLink>
+          <NavLink to="/my-services" className="navLink">
+            My Services
+          </NavLink>
           <NavLink to="/my-reviews" className="navLink">
             My Reviews
           </NavLink>

@@ -1,22 +1,32 @@
-import { IconButton, Rating } from "@mui/material";
+import { Rating } from "@mui/material";
 import axios from "axios";
 import moment from "moment";
 import PropTypes from "prop-types";
 
+
 import { FaLocationArrow } from "react-icons/fa";
-import { MdDelete, MdModeEdit } from "react-icons/md";
+
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import fakeThumb from '../assets/fakeThumb.jpg'
 
-const MyReviewCard = ({ review,setDemoLoad,demoLoad }) => {
+const MyReviewCard = ({ review, setDemoLoad, demoLoad,handleUpdate }) => {
+  const {
+    postedDate,
+    ratingStar,
+    serviceId,
+    serviceLogo,
+    serviceName,
+    text,
+    _id,
+    edited
+  } = review;
 
-  const { postedDate, ratingStar, serviceId, serviceLogo, serviceName, text, _id } =
-    review;
+  
 
   const formattedDate = moment(postedDate).format("MMMM Do YYYY, h:mm A");
 
   const handleDeleteReview = () => {
-
     Swal.fire({
       title: "Are you sure?",
       text: "Do you want delete this review?",
@@ -34,42 +44,47 @@ const MyReviewCard = ({ review,setDemoLoad,demoLoad }) => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        
-        axios.delete(`http://localhost:5000/delete-review/${_id}`)
-        .then(res => {
+        axios
+          .delete(`http://localhost:5000/delete-review/${_id}`)
+          .then((res) => {
             if (res.data.deletedCount) {
-                Swal.fire({
-                    icon: "success",
-                    title: "Deleted!",
-                    text: "Review deleted Successfully!",
-                    confirmButtonText: "Okay",
-                    scrollbarPadding: false,
-                    showConfirmButton: false,
-                    timer: 1500,
-                    customClass: {
-                      title: "text-xl  md:text-3xl font-bold ",
-                      text: "text-3xl ",
-                      popup: "text-black rounded-3xl outline outline-[#16A34A]",
-                      confirmButton: "bg-[#16A34A] rounded-full py-[10px] px-[30px]",
-                    },
-                  });
-                  setDemoLoad(demoLoad + 1)
+              Swal.fire({
+                icon: "success",
+                title: "Deleted!",
+                text: "Review deleted Successfully!",
+                confirmButtonText: "Okay",
+                scrollbarPadding: false,
+                showConfirmButton: false,
+                timer: 1500,
+                customClass: {
+                  title: "text-xl  md:text-3xl font-bold ",
+                  text: "text-3xl ",
+                  popup: "text-black rounded-3xl outline outline-[#16A34A]",
+                  confirmButton:
+                    "bg-[#16A34A] rounded-full py-[10px] px-[30px]",
+                },
+              });
+              setDemoLoad(demoLoad + 1);
             }
-        })
-          
-           
-         
-      
+          });
       }
     });
-   
   };
+  const handleImage = (e) => {
+    e.target.src = fakeThumb
+  }
 
   return (
     <div className="border rounded-2xl p-3 flex justify-between ">
+   
+  
+
+
+
       <div className="flex gap-3 w-3/12">
         <img
           className="w-24 h-16 object-cover rounded-lg"
+          onError={handleImage}
           src={serviceLogo}
           alt=""
         />
@@ -89,25 +104,30 @@ const MyReviewCard = ({ review,setDemoLoad,demoLoad }) => {
           <Rating name="read-only" value={ratingStar} readOnly size="small" />
           <h2 className="text-sm">({ratingStar})</h2>
         </div>
+        {edited && <h2 className="text-xs text-white font-medium bg-pColor  px-2 py-[1px] rounded-full w-max">Edited</h2>}
         <p>{text}</p>
         <h2 className="text-sm pt-2">Added on {formattedDate}</h2>
       </div>
 
       <div className="w-1/12  text-right">
-        <IconButton onClick={handleDeleteReview} color="error">
-          <MdDelete />
-        </IconButton>
+     
+        <button onClick={() => handleUpdate(_id)} className="btn btn-ghost text-pColor hover:bg-pColor hover:text-white btn-xs"> 
+          
+            Edit</button>
+            <button onClick={handleDeleteReview} className="btn btn-ghost text-red-500 hover:bg-red-500 hover:text-white btn-xs">Delete</button>
 
-        <IconButton color="warning">
-          <MdModeEdit />
-        </IconButton>
+       
       </div>
+
+
+    
     </div>
   );
 };
 MyReviewCard.propTypes = {
   review: PropTypes.object,
-  setDemoLoad : PropTypes.func,
-  demoLoad : PropTypes.number
+  setDemoLoad: PropTypes.func,
+  demoLoad: PropTypes.number,
+  handleUpdate : PropTypes.func
 };
 export default MyReviewCard;
