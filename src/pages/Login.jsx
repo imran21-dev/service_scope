@@ -1,5 +1,5 @@
 import { Button, IconButton } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
 import {
   RiEye2Line,
@@ -11,6 +11,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ThemeContext } from "../provider/ContextApi";
 import Swal from "sweetalert2";
 import googlepng from '../assets/google.png'
+import { useLoadingBar } from "react-top-loading-bar";
+
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -19,13 +21,20 @@ const Login = () => {
   const {state} = useLocation()
   const desiredRoute = state?.desiredRoute
   
-  console.log(desiredRoute)
+  const { start, complete } = useLoadingBar({ color: "#FA6500", height: 2 });
+
+  useEffect(()=>{
+   start()
+   setTimeout(()=>{
+    complete()
+   }, 200)
+  },[complete, start])
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const {login,GoogleSignIn} = useContext(ThemeContext)
+  const {login,GoogleSignIn,} = useContext(ThemeContext)
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -85,6 +94,7 @@ const Login = () => {
   const handleSignIn = () => {
         GoogleSignIn()
         .then(() => {
+        
             Swal.fire({
                 icon: "success",
                 title: "Logged in!",

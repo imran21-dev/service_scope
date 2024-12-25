@@ -211,7 +211,7 @@ const MyServices = () => {
           <div className="skeleton h-6 w-44"></div>
           <div className="skeleton h-12 rounded-full w-96"></div>
           </div>
-          <div className="skeleton h-12 rounded-none mt-5 mb-3 w-full"></div>
+          <div className="skeleton h-12 rounded-2xl mt-5 mb-3 w-full"></div>
 
         <div className="space-y-1">
           <div className="skeleton h-16 w-full"></div>
@@ -255,7 +255,7 @@ const MyServices = () => {
           </div>
         </div>
         <div className="pt-5">
-          <section className="w-full bg-pColor/5 text-pColor  py-3 flex text-sm font-bold">
+          <section className="w-full bg-pColor/10 rounded-xl mb-1 text-pColor  py-3 flex text-sm font-bold">
             <div className=" w-3/6 flex pl-6 gap-5">
               <h2 className="flex items-center">
                 Logo <RxTriangleDown />

@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase.config";
+import axios from "axios";
 
 export const ThemeContext = createContext(null)
 const ContextApi = ({children}) => {
@@ -45,6 +46,27 @@ const ContextApi = ({children}) => {
    processing,
    blockScroll, setBlockScroll
    }
+
+   useEffect(()=>{
+
+    if (!user) {
+      return
+    }
+
+    const {displayName, photoURL, email} = user
+    const newUser = {
+      displayName,
+      photoURL,
+      email
+    }
+
+    axios.post('http://localhost:5000/add-user', newUser)
+    .then(() => {
+      
+    })
+
+   },[user])
+
    console.log(user)
 
     return (

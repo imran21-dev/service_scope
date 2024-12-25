@@ -9,6 +9,8 @@ import { IoMdClose } from "react-icons/io";
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 import { useLoadingBar } from "react-top-loading-bar";
+import Lottie from "lottie-react";
+import noData from '../assets/noresult.json'
 
 const MyReviews = () => {
   const { user, setBlockScroll } = useContext(ThemeContext);
@@ -142,6 +144,12 @@ const MyReviews = () => {
         </div>
         
         :
+
+        myReviews.length < 1 ? <div className=" flex items-center flex-col justify-center h-96">
+        <Lottie loop={false} className="w-2/12" animationData={noData}></Lottie>
+        <h1 className="font-medium">No result found</h1>
+      </div> 
+      :
 
         <div className="space-y-3 pt-4">
           {myReviews.map((review) => (

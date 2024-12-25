@@ -65,7 +65,7 @@ const handleImage = (e) => {
   e.target.src = fakeThumb
 }
     return (
-        <tr className="flex w-full justify-between">
+        <tr className="flex w-full justify-between hover:bg-pColor/5 rounded-xl">
              
         <td className="w-3/6">
           <div className="flex items-center gap-3">

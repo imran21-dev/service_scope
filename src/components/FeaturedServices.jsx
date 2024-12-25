@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ServiceCart from "./ServiceCart";
 import SkeletonCart from "./SkeletonCart";
 import { useLoadingBar } from "react-top-loading-bar";
+import { Link } from "react-router-dom";
 
 const FeaturedServices = () => {
   const [featuredServices, setFeaturedServices] = useState([]);
@@ -43,7 +44,7 @@ const FeaturedServices = () => {
       
       }
 
-     
+     <Link to='/services' className="btn rounded-full bg-pColor text-white px-8 border-none">Show all Services</Link>
       
      
     </div>

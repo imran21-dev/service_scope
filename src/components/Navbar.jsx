@@ -26,7 +26,7 @@ const Navbar = () => {
       showCancelButton: true,
       confirmButtonColor: "#f12804",
       cancelButtonColor: "#16A34A",
-      confirmButtonText: "Yes",
+      confirmButtonText: "Yes, log me out",
       customClass: {
         title: "text-xl  md:text-3xl font-bold ",
         text: "text-3xl ",

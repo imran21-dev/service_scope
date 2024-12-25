@@ -1,5 +1,5 @@
 import { Alert, IconButton } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { ImSpinner9 } from "react-icons/im";
 import {
@@ -15,6 +15,8 @@ import { ThemeContext } from "../provider/ContextApi";
 import Swal from "sweetalert2";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../provider/firebase.config";
+import { useLoadingBar } from "react-top-loading-bar";
+
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -23,8 +25,15 @@ const Register = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const desiredRoute = state?.desiredRoute;
+  const { start, complete } = useLoadingBar({ color: "#FA6500", height: 2 });
 
-  console.log(desiredRoute);
+  useEffect(()=>{
+   start()
+   setTimeout(()=>{
+    complete()
+   }, 200)
+  },[complete, start])
+  
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -56,6 +65,7 @@ const Register = () => {
           photoURL: photo,
         })
           .then(() => {
+
             Swal.fire({
               icon: "success",
               title: "Success!",
@@ -78,6 +88,7 @@ const Register = () => {
             } else {
               navigate("/");
             }
+
           })
           .catch((error) => {
             Swal.fire({
