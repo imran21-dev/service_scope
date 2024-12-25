@@ -1,6 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { Button } from "@mui/material";
 import { useContext,  } from "react";
 import { ThemeContext } from "../provider/ContextApi";
 import Swal from "sweetalert2";
@@ -74,13 +73,13 @@ const Navbar = () => {
   return (
     <Headroom>
      <section className="w-full bg-white">
-     <div className="navbar w-10/12 mx-auto bg-white relative z-50">
+     <div className="navbar md:w-10/12 mx-auto bg-white relative z-50">
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} role="button" className="px-2 lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-4 w-4"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -97,27 +96,29 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+              <NavLink to="/" className="navLink">
+            Home
+          </NavLink>
+          <NavLink to="/services" className="navLink">
+            Services
+          </NavLink>
+          {
+           user && <>
+           <NavLink to="/add-service" className="navLink">
+            Add Service
+          </NavLink>
+          <NavLink to="/my-services" className="navLink">
+            My Services
+          </NavLink>
+          <NavLink to="/my-reviews" className="navLink">
+            My Reviews
+          </NavLink>
+           </>
+          }
           </ul>
         </div>
-        <Link to='/' className="text-2xl font-bold flex items-center gap-1">
-          <img className="w-8 hue-rotate-180" src={logo} alt="" /> Service Scope
+        <Link to='/' className="text-sm md:text-2xl font-bold flex items-center gap-1">
+          <img className="w-5 md:w-8 hue-rotate-180" src={logo} alt="" /> Service Scope
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -143,36 +144,37 @@ const Navbar = () => {
           }
         </ul>
       </div>
-      <div className="navbar-end space-x-2">
+      <div className="navbar-end  space-x-2">
         {processing ? (
           <>
-            <div className="skeleton py-[6px] text-transparent rounded-full px-6">
+            <div className="skeleton md:px-6 min-h-max h-max md:py-3 py-1 px-3 md:text-[14px] text-xs rounded-full text-transparent">
               Login
             </div>
-            <div className="skeleton py-[6px] text-transparent rounded-full px-6">
+
+            <div className="skeleton md:px-6 min-h-max h-max md:py-3 py-1 px-3 md:text-[14px] text-xs rounded-full text-transparent">
               Register
             </div>
-
-            <div className="skeleton py-[6px] text-transparent rounded-full px-6">
+            <div className="skeleton hidden md:block md:px-6 min-h-max h-max md:py-3 py-1 px-3 md:text-[14px] text-xs rounded-full text-transparent">
               Log Out
             </div>
-            <div className="skeleton h-10 w-10 shrink-0 rounded-full"></div>
+
+            <div className="skeleton md:h-10 h-6 w-6 md:w-10 shrink-0 rounded-full"></div>
           </>
         ) : (
           <>
             {user ? (
               <>
-                <Button
+                <button
                   onClick={handleLogOut}
-                  variant="contained"
-                  className="mt-1 myBtn"
+                 
+                  className="btn  md:px-6 min-h-max h-max md:py-3 py-1 px-3 md:text-[14px] text-xs rounded-full "
                 >
-                  Log Out{" "}
-                </Button>
+                  Log Out
+                </button>
 
                  <img
                   onError={handleUserImage}
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="md:w-10 w-6 h-6 md:h-10 rounded-full object-cover"
                   src={photo}
                   alt=""
                 />
@@ -180,20 +182,12 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <NavLink to="/login">
-                  {" "}
-                  <Button
-                    variant="contained"
-                    className="mt-1 myBtn"
-                  >
-                    Login{" "}
-                  </Button>
+                <NavLink to="/login" className='btn  md:px-6 min-h-max h-max md:py-3 py-1 px-3 md:text-[14px] text-xs rounded-full'>
+                 Login
                 </NavLink>
 
-                <NavLink to="/register">
-                  <Button variant="contained" className="mt-1 myBtn">
-                    Register{" "}
-                  </Button>
+                <NavLink to="/register" className='btn  md:px-6 min-h-max h-max md:py-3 py-1 px-3 md:text-[14px] text-xs rounded-full'>
+                  Register
                 </NavLink>
               </>
             )}

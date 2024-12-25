@@ -45,14 +45,14 @@ const HomePage = () => {
         <title>Home | Service Scope</title>
       </Helmet>
       <section className="relative z-0 ">
-        <img className="absolute z-10 w-96 animate-spin-slow left-0 -bottom-96" src={cicle} alt="" />
+        <img className="absolute z-10 w-32 md:w-52 lg:w-96 animate-spin-slow md:left-5 lg:left-3 left-3 md:-bottom-64 lg:-bottom-96 -bottom-48" src={cicle} alt="" />
         
-        <div className=" absolute z-10 left-20 rotate-45 -top-40">
-        <img className=" w-72 animate-spin-slow3" src={plant} alt="" />
+        <div className=" absolute z-10 left-20 rotate-45 -top-10 md:-top-32 lg:-top-40">
+        <img className="w-20 md:w-44 lg:w-72 animate-spin-slow3" src={plant} alt="" />
         </div>
 
-        <div className=" origin-center right-32 -top-40 absolute  z-10">
-        <img className=" w-64 animate-spin-slow2  " src={shape} alt="" />
+        <div className=" origin-center right-3 md:right-32 -top-10 md:-top-40 absolute  z-10">
+        <img className="w-20 md:w-64 animate-spin-slow2  " src={shape} alt="" />
         </div>
        
         <Swiper
@@ -90,34 +90,34 @@ const HomePage = () => {
             duration: 0.4,
             scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
         }}
-       className="flex  mx-auto justify-center font-['Exo 2']">
+       className="flex mx-auto justify-center font-['Exo 2']">
 
       
        
-       <section className=" px-10  w-44 border-r border-[#753a88]/20  pb-5 flex-col flex items-center justify-between">
+       <section className=" md:px-10  w-44 border-r border-[#753a88]/20  pb-5 flex-col flex items-center justify-between">
         
 
        <div >
-        <h1 className="text-5xl bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allUser} ></CountUp></h1>
-        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent">Users</h1>
+        <h1 className="text-3xl md:text-5xl bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allUser} ></CountUp></h1>
+        <h1 className="uppercase md:text-base text-sm font-semibold mt-1 bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent">Users</h1>
        </div>
        </section>
 
-       <section className=" px-10 w-44 border-r border-[#753a88]/20 pb-5 flex-col flex items-center justify-between">
+       <section className=" md:px-10 w-44 border-r border-[#753a88]/20 pb-5 flex-col flex items-center justify-between">
         
 
        <div >
-        <h1 className="text-5xl bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allServices} ></CountUp></h1>
-        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent">services</h1>
+        <h1 className="text-3xl md:text-5xl bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allServices} ></CountUp></h1>
+        <h1 className="uppercase md:text-base text-sm font-semibold mt-1 bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent">services</h1>
        </div>
        </section>
 
-       <section className=" px-10 w-44  pb-5 flex-col flex items-center justify-between">
+       <section className=" md:px-10 w-44  pb-5 flex-col flex items-center justify-between">
        
 
        <div >
-        <h1 className="text-5xl bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allReviews} ></CountUp></h1>
-        <h1 className="uppercase font-semibold mt-1 bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent">Reviews</h1>
+        <h1 className="text-3xl md:text-5xl bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent  font-extrabold"><CountUp start={0} end={allReviews} ></CountUp></h1>
+        <h1 className="uppercase md:text-base text-sm font-semibold mt-1 bg-gradient-to-tl from-[#753a88] to-[#cc2b5e] bg-clip-text text-transparent">Reviews</h1>
        </div>
        </section>
        

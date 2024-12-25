@@ -23,16 +23,13 @@ transition: .2s ease-in-out;
  border-bottom: 2px solid #FA6500;
 }
 
-.navbar-end .active {
-  @apply w-max    !bg-pColor/10 !shadow-none !text-white !rounded-full !capitalize
-}
 
 .myBtn{
-@apply w-max !px-6 !bg-black/5 !text-black hover:!bg-pColor !shadow-none hover:!text-white !rounded-full !capitalize
+@apply w-max md:!text-sm !text-xs !px-6 !bg-black/5 !text-black hover:!bg-pColor !shadow-none hover:!text-white !rounded-full !capitalize
 }
 
 .slider-li{
-@apply  bg-pColor/10 border border-pColor/20 px-5 rounded-full py-1 text-pColor text-sm mt-2
+@apply  bg-pColor/10 border border-pColor/20 md:px-5 px-2 rounded-full py-1 text-pColor text-xs md:text-sm md:mt-2
 }
 
 ::-webkit-scrollbar{

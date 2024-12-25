@@ -131,31 +131,31 @@ const Register = () => {
     window.scrollTo(0,0)
   },[])
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <div className="w-full relative">
+    <div className="min-h-screen flex flex-col items-center md:justify-center">
+      <div className="w-full pt-10 md:pt-0 relative">
        <Helmet>
                     <title>Register | Service Scope</title>
                   </Helmet>
-      <div className="mx-auto w-5/12 px-8">
+      <div className="mx-auto lg:w-5/12 md:px-8">
         {passwordError && (
-          <Alert className="absolute  top-7  w-3/12 " severity="error">
-            <span>
+          <Alert className="absolute -top-0 md:-top-14  xl:w-3/12 " severity="error">
+            <span className="md:text-sm text-xs">
               {" "}
               Password must be at least 6 characters, including an uppercase and
               a lowercase letter.
             </span>
             <button
               onClick={resetPassword}
-              className="px-2 font-medium text-pColor hover:underline"
+              className="px-2 text-xs md:text-sm font-medium text-pColor hover:underline"
             >
               Retry
             </button>
           </Alert>
         )}
       </div>
-      <form onSubmit={handleRegister} className="card-body w-5/12 mx-auto">
-        <h1 className="text-2xl font-bold">Join Us Today!</h1>
-        <p className="pb-5">
+      <form onSubmit={handleRegister} className="card-body lg:w-5/12 mx-auto">
+        <h1 className="text-lg md:text-2xl font-bold">Join Us Today!</h1>
+        <p className="md:pb-5 text-sm md:text-base">
           Create your account to access exclusive features.
         </p>
 
@@ -164,12 +164,12 @@ const Register = () => {
             <span className="label-text">Name</span>
           </label>
           <div className="border flex items-center rounded-xl ">
-            <RiUser2Fill className="text-xl ml-2" />
+            <RiUser2Fill className="md:text-xl ml-2" />
             <input
               type="text"
               name="name"
               placeholder="Your name"
-              className=" flex-1 focus:outline-none py-2 px-2 bg-transparent"
+              className="text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
               required
             />
           </div>
@@ -180,12 +180,12 @@ const Register = () => {
             <span className="label-text">Photo URL</span>
           </label>
           <div className="border flex items-center rounded-xl ">
-            <RiLink className="text-xl ml-2" />
+            <RiLink className="md:text-xl ml-2" />
             <input
               type="url"
               name="photo"
               placeholder="Your photo URL"
-              className=" flex-1 focus:outline-none py-2 px-2 bg-transparent"
+              className="text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
               required
             />
           </div>
@@ -196,12 +196,12 @@ const Register = () => {
             <span className="label-text">Email</span>
           </label>
           <div className="border flex items-center rounded-xl ">
-            <RiMailFill className="text-xl ml-2" />
+            <RiMailFill className="md:text-xl ml-2" />
             <input
               type="email"
               name="email"
               placeholder="Your email"
-              className=" flex-1 focus:outline-none py-2 px-2 bg-transparent"
+              className="text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
               required
             />
           </div>
@@ -212,33 +212,33 @@ const Register = () => {
             <span className="label-text">Password</span>
           </label>
           <div className="border flex items-center rounded-xl ">
-            <RiLock2Fill className="text-xl ml-2" />
+            <RiLock2Fill className="md:text-xl ml-2" />
             <input
               type={showPassword ? "password" : "text"}
               placeholder="Password"
               name="password"
               id="passwordField"
-              className=" flex-1 focus:outline-none py-2 px-2 bg-transparent"
+              className="text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
               required
             />
             {showPassword ? (
               <IconButton onClick={handleShowPassword} aria-label="fingerprint">
-                <RiEyeCloseLine className="text-base text-pColor" />
+                <RiEyeCloseLine className="text-sm md:text-base text-pColor" />
               </IconButton>
             ) : (
               <IconButton onClick={handleShowPassword} aria-label="fingerprint">
-                <RiEye2Line className="text-base text-pColor" />
+                <RiEye2Line className="text-sm md:text-base text-pColor" />
               </IconButton>
             )}
           </div>
         </div>
 
         <div className="form-control mt-6">
-          <button className="btn rounded-full py-3 min-h-max h-max bg-pColor border-none text-white hover:bg-pColor">
+          <button className="btn rounded-full text-xs md:text-sm py-3 min-h-max h-max bg-pColor border-none text-white hover:bg-pColor">
             {loading && <ImSpinner9 className="animate-spin" />} Register
           </button>
         </div>
-        <h1 className="text-sm text-center">
+        <h1 className="text-xs md:text-sm text-center">
           Already have an account?{" "}
           <Link
             state={

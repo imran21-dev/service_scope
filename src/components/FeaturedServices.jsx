@@ -27,17 +27,17 @@ const FeaturedServices = () => {
 
   return (
     <section className="bg-white relative">
-      <div className="w-10/12 mx-auto py-10">
-      <h1 className="text-xl font-semibold">Featured Services</h1>
+      <div className="md:w-10/12 mx-3  md:mx-auto py-10">
+      <h1 className="text-lg  md:text-xl font-semibold">Featured Services</h1>
 
 
       {
-      sleketonTime ?  <div className="grid grid-cols-4 gap-6  py-5">
+      sleketonTime ?  <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 md:gap-6 gap-3  py-5">
       {featuredServicesSkeleton.map((skeleton, idx) => (
         <SkeletonCart key={idx}></SkeletonCart>
       ))}
     </div> :
-     <div className="grid grid-cols-4 gap-6  py-5">
+     <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 md:gap-6 gap-3  py-5">
      {featuredServices.map((service) => (
        <ServiceCart service={service} key={service._id}></ServiceCart>
      ))}
@@ -45,7 +45,7 @@ const FeaturedServices = () => {
       
       }
 
-     <Link to='/services' className="btn rounded-full min-h-max h-max py-3 bg-pColor text-white px-8 border-none">Show all Services</Link>
+     <Link to='/services' className="btn text-xs md:text-sm rounded-full min-h-max h-max py-2 md:py-3 bg-pColor text-white md:px-8 border-none">Show all Services</Link>
       
      
     </div>

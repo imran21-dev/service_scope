@@ -23,17 +23,17 @@ useEffect(()=> {
 },[])
 
     return (
-        <div className="w-10/12 mx-auto py-10">
+        <div className="md:w-10/12 mx-3 md:mx-auto py-10">
             
-            <h1 className="text-xl font-semibold">Top Reviews</h1>
+            <h1 className="text-lg md:text-xl font-semibold">Top Reviews</h1>
 
           {
-           skeletonTime ?  <div className="grid grid-cols-5 gap-5 py-5">
+           skeletonTime ?  <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 md:gap-5 gap-3  py-5">
            {
             skeletonCount.map((skeleton, idx) => <ReviewSkeleton  key={idx}></ReviewSkeleton>)
            }
        </div> :
-         <div className="grid grid-cols-5 gap-5 py-5">
+         <div className="grid  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 md:gap-5 gap-3 py-5">
          {
           topReviews.map(review => <TopReviewCart review={review} key={review._id}></TopReviewCart>)
          }

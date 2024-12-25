@@ -13,8 +13,8 @@ const MeetOurPartner = () => {
         .then(data => setPartners(data))
     },[])
   return (
-    <div className="w-10/12 mx-auto py-10">
-      <h1 className="text-2xl font-semibold text-center pb-5">Meet Our Partners</h1>
+    <div className="md:w-10/12 mx-3 md:mx-auto py-10">
+      <h1 className="text-xl md:text-2xl font-semibold text-center pb-5">Meet Our Partners</h1>
       
      
      

@@ -139,26 +139,26 @@ const Login = () => {
     window.scrollTo(0,0)
   },[])
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-     <section className="w-full">
+    <div className="min-h-screen flex flex-col items-center md:justify-center">
+     <section className="w-full pt-10 md:pt-0">
      <Helmet>
                     <title>Login | Service Scope</title>
                   </Helmet>
-      <form onSubmit={handleLogin} className="card-body  w-5/12 mx-auto">
-        <h1 className="text-2xl font-bold">Welcome Back!</h1>
-        <p className="pb-5">Log in to continue your journey.</p>
+      <form onSubmit={handleLogin} className="card-body lg:w-5/12 mx-auto">
+        <h1 className="text-lg md:text-2xl font-bold">Welcome Back!</h1>
+        <p className="md:pb-5 text-sm md:text-base">Log in to continue your journey.</p>
 
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>
           </label>
           <div className="border flex items-center rounded-xl ">
-            <RiMailFill className="text-xl ml-2" />
+            <RiMailFill className="md:text-xl ml-2" />
             <input
               type="email"
               name="email"
               placeholder="Your email"
-              className=" flex-1 focus:outline-none py-2 px-2 bg-transparent"
+              className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
               required
             />
           </div>
@@ -169,33 +169,33 @@ const Login = () => {
             <span className="label-text">Password</span>
           </label>
           <div className="border flex items-center rounded-xl ">
-            <RiLock2Fill className="text-xl ml-2" />
+            <RiLock2Fill className="md:text-xl ml-2" />
             <input
               type={showPassword ? "password" : "text"}
               placeholder="Password"
               name="password"
               id="passwordField"
-              className=" flex-1 focus:outline-none py-2 px-2 bg-transparent"
+              className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
               required
             />
             {showPassword ? (
               <IconButton onClick={handleShowPassword} aria-label="fingerprint">
-                <RiEyeCloseLine className="text-base text-pColor" />
+                <RiEyeCloseLine className="text-sm md:text-base text-pColor" />
               </IconButton>
             ) : (
               <IconButton onClick={handleShowPassword} aria-label="fingerprint">
-                <RiEye2Line className="text-base text-pColor" />
+                <RiEye2Line className="text-sm md:text-base text-pColor" />
               </IconButton>
             )}
           </div>
         </div>
 
         <div className="form-control mt-6">
-          <button className="btn rounded-full py-3 min-h-max h-max bg-pColor border-none text-white hover:bg-pColor">
+          <button className="btn rounded-full text-xs md:text-sm py-3 min-h-max h-max bg-pColor border-none text-white hover:bg-pColor">
             {loading && <ImSpinner9 className="animate-spin" />} Login
           </button>
         </div>
-        <h1 className="text-sm text-center">
+        <h1 className="text-xs md:text-sm text-center">
           Do not have an account?{" "}
           <Link
             state={desiredRoute ? {desiredRoute : desiredRoute} : {desiredRoute : '/'}}
@@ -206,9 +206,9 @@ const Login = () => {
           </Link>
         </h1>
       </form>
-      <div className="w-3/12 mx-auto flex flex-col items-center">
+      <div className="md:w-3/12 w-3/4 mx-auto flex flex-col items-center">
       <div className="divider">or</div>
-      <Button onClick={handleSignIn} className="myBtn "><img className="w-4 mr-2" src={googlepng} alt="" /> Google</Button>
+      <Button onClick={handleSignIn} className="myBtn"><img className="w-4 mr-2" src={googlepng} alt="" /> Google</Button>
       </div>
      </section>
 
