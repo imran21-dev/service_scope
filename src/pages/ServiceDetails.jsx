@@ -156,12 +156,14 @@ const ServiceDetails = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-start">
-    <div className="w-10/12 flex gap-6 mx-auto py-10 relative">
+    <div className="lg:w-10/12 flex lg:flex-row flex-col lg:gap-6 gap-2 px-3 lg:px-0 w-full lg:mx-auto py-10 relative">
+    
       <Helmet>
         <title>{`Service Details - ${_id} | Service Scope`}</title>
       </Helmet>
       {loadingService ? (
-        <div className="w-3/5 h-max grid grid-cols-2 gap-4 ">
+        <div className="lg:w-3/5 h-max grid xl:grid-cols-2 gap-3 lg:gap-7 ">
+        
           <div className="skeleton h-64 w-full"></div>
 
           <div className="space-y-3 pt-1">
@@ -182,30 +184,34 @@ const ServiceDetails = () => {
           <div className="skeleton h-28 w-full"></div>
         </div>
       ) : (
-        <section className="w-3/5 h-max grid grid-cols-2 gap-7">
-          <img
-            className="w-full h-64 object-cover rounded-badge border-2 border-pColor/20"
+        <section className="lg:w-3/5 h-max grid xl:grid-cols-2 gap-3 lg:gap-7">
+          
+        <div>
+      
+        <img
+            className="w-full h-64 object-cover rounded-xl lg:rounded-badge border-2 border-pColor/20"
             onError={handleImage}
             src={serviceImage}
             alt=""
           />
+        </div>
           <div className="w-full">
-            <h1 className="text-2xl font-bold pt-1">{serviceTitle}</h1>
-            <p className="py-2">{description}</p>
-            <h2 className="font-medium">
+            <h1 className="texxt-lg lg:text-2xl font-bold pt-1">{serviceTitle}</h1>
+            <p className="text-sm py-1 lg:text-base lg:py-2">{description}</p>
+            <h2 className="font-medium lg:text-base text-sm">
               Total Reviews ({allReviews ? allReviews.length : "0"})
             </h2>
-            <div className="flex items-center py-2 gap-1">
-              <h2 className="flex items-center font-medium">
+            <div className="flex items-center py-1 lg:py-2 gap-1">
+              <h2 className="flex items-center lg:text-base text-sm font-medium">
                 Category <IoMdArrowDropright />
               </h2>
-              <h2 className="font-medium capitalize bg-pColor/5 text-pColor border border-pColor rounded-full px-3 text-sm  py-1 w-max">
+              <h2 className="font-medium capitalize bg-pColor/5 text-pColor border border-pColor rounded-full lg:px-3 px-2 text-xs lg:text-sm py-[2px] lg:py-1 w-max">
                 {category}
               </h2>
             </div>
-            <h2 className="text-lg font-semibold">Price: ${price}</h2>
-            <h2 className="text-sm font-medium py-2">Added on : {addedDate}</h2>
-            <h2 className="text-sm font-medium flex items-center gap-1">
+            <h2 className="text-sm lg:text-lg font-semibold">Price: ${price}</h2>
+            <h2 className="text-xs lg:text-sm font-medium py-1 lg:py-2">Added on : {addedDate}</h2>
+            <h2 className="text-xs lg:text-sm font-medium flex items-center gap-1">
               Publisher : {publisherName ? publisherName : "Unavailable"}{" "}
               {currentUserEmail === userEmail && (
                 <span className="bg-pColor text-xs py-[1px] text-white rounded-full px-2 flex w-max">
@@ -215,23 +221,23 @@ const ServiceDetails = () => {
             </h2>
           </div>
 
-          <div>
+          <div className="">
             <RatingSummary allReviews={allReviews}></RatingSummary>
 
             <div
               onClick={handleWebsite}
-              className="border hover:bg-pColor/5 cursor-pointer w-full h-max border-pColor/20 p-4 rounded-2xl flex items-center justify-between"
+              className="border hover:bg-pColor/5 cursor-pointer w-full h-max border-pColor/20 p-4 lg:rounded-2xl rounded-lg flex items-center justify-between"
             >
               <div>
-                <h2 className="flex items-center gap-2 text-pColor font-medium">
+                <h2 className="flex items-center lg:text-base text-sm gap-2 text-pColor font-medium">
                   <CiShare1 />
                   {companyName}
                 </h2>
-                <h3 className="text-sm pt-1 text-secondaryTextColor/70">
+                <h3 className="text-xs lg:text-sm pt-1 text-secondaryTextColor/70">
                   Visit this website
                 </h3>
               </div>
-              <BsArrowRight className="text-xl text-pColor" />
+              <BsArrowRight className="lg:text-xl text-pColor" />
             </div>
           </div>
 
@@ -246,7 +252,7 @@ const ServiceDetails = () => {
                 />
                 <h1
                   onClick={handleReviewForm}
-                  className="text-pColor font-semibold cursor-pointer  flex items-center gap-1"
+                  className="text-pColor font-semibold lg:text-base text-sm cursor-pointer  flex items-center gap-1"
                 >
                   {write ? "Cancel" : "Write a review"}
                   {write ? <MdCancel /> : <FaPenNib className="text-sm" />}
@@ -266,13 +272,13 @@ const ServiceDetails = () => {
                 required
                 rows="10"
                 name="text"
-                className={`custom-scrollbar duration-150 resize-none  w-full outline-transparent  ${
-                  write ? "h-64" : "h-0 "
+                className={`custom-scrollbar lg:text-base text-sm duration-150 resize-none  w-full outline-transparent  ${
+                  write ? "lg:h-64 h-44" : "h-0 "
                 }`}
                 placeholder="Write your review here... Share your experience, thoughts, or feedback about the service!"
               ></textarea>
               {write && (
-                <button className="btn rounded-full min-h-max h-max py-3 text-white bg-pColor">
+                <button className="btn rounded-full min-h-max h-max  text-xs md:text-[14px] py-2 lg:py-3 text-white bg-pColor">
                   {postLoad && <ImSpinner9 className="animate-spin" />} Add
                   Review <IoSendSharp />
                 </button>
@@ -283,13 +289,13 @@ const ServiceDetails = () => {
       )}
 
       {loading ? (
-        <div className="flex w-2/5 flex-col  gap-2">
+        <div className="flex lg:w-2/5 flex-col  gap-2">
           {skeletonCount.map((skeleton, idx) => (
             <ReviewSkeleton key={idx}></ReviewSkeleton>
           ))}
         </div>
       ) : (
-        <section className="w-2/5 h-[750px]  custom-scrollbar  overflow-y-scroll">
+        <section className="lg:w-2/5 h-[750px]  custom-scrollbar  overflow-y-scroll">
           <div className="">
             {allReviews.length < 1 ? (
               <h2 className="text-lg w-full h-[750px] bg-gray-100/50 rounded-2xl font-medium flex justify-center items-center ">

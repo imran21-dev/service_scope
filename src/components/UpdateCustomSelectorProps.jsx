@@ -64,7 +64,7 @@ const UpdateCustomSelectorProps = ({category}) => {
         value: category.value,
       }))}
       styles={styles}
-      placeholder="Select a service category"
+      placeholder="Category"
       isSearchable
       value={selectedCategory}
       onChange={(selectedOption) => setSelectedCategory(selectedOption)} 

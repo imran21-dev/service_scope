@@ -105,26 +105,26 @@ const AddService = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-start">
 
-    <div className="w-10/12 pt-10 mx-auto text-center">
+    <div className="lg:w-10/12 lg:px-0 px-3 pt-3 md:pt-10 mx-auto text-center">
        <Helmet>
                     <title>Add Service | Service Scope</title>
                   </Helmet>
-      <h1 className="text-xl font-semibold">Add a New Service</h1>
-      <p className="py-1 text-secondaryTextColor/50">
+      <h1 className="text-lg md:text-2xl font-bold">Add a New Service</h1>
+      <p className="py-1 text-secondaryTextColor/50 md:pb-5 text-sm md:text-base">
         Provide details to expand your offerings.
       </p>
 
-      <form onSubmit={handleAddService} className="card-body w-7/12 mx-auto">
+      <form onSubmit={handleAddService} className=" px-3 lg:px-0 md:w-7/12 mx-auto">
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Service Title</span>
+            <span className="text-xs md:text-sm">Service Title</span>
           </label>
           <div className="border flex items-center rounded-xl ">
             <input
               type="text"
               name="serviceTitle"
               placeholder="Service title"
-              className=" flex-1 focus:outline-none py-2 px-3 bg-transparent"
+              className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
               required
             />
           </div>
@@ -132,30 +132,30 @@ const AddService = () => {
 
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Service Image</span>
+            <span className="text-xs md:text-sm">Service Image</span>
           </label>
           <div className="border flex items-center rounded-xl ">
             <input
               type="url"
               name="serviceImage"
               placeholder="Service image URL"
-              className=" flex-1 focus:outline-none py-2 px-3 bg-transparent"
+              className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
               required
             />
           </div>
         </div>
 
-        <section className="grid grid-cols-2 gap-x-6 gap-y-1">
+        <section className="grid grid-cols-2 gap-x-2 lg:gap-x-6 gap-y-1">
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Company Name</span>
+              <span className="text-xs md:text-sm">Company Name</span>
             </label>
             <div className="border flex items-center rounded-xl ">
               <input
                 type="text"
                 name="companyName"
                 placeholder="Company name"
-                className=" flex-1 focus:outline-none py-2 px-3 bg-transparent"
+                className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
                 required
               />
             </div>
@@ -163,14 +163,14 @@ const AddService = () => {
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Website URL</span>
+              <span className="text-xs md:text-sm">Website URL</span>
             </label>
             <div className="border flex items-center rounded-xl ">
               <input
                 type="url"
                 name="website"
                 placeholder="Website URL"
-                className=" flex-1 focus:outline-none py-2 px-3 bg-transparent"
+                className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
                 required
               />
             </div>
@@ -178,30 +178,32 @@ const AddService = () => {
 
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Price</span>
+              <span className="text-xs md:text-sm">Price</span>
             </label>
             <div className="border flex items-center rounded-xl ">
               <input
                 type="number"
                 name="price"
                 placeholder="Service price"
-                className=" flex-1 focus:outline-none py-2 px-3 bg-transparent"
+                className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
                 required
               />
             </div>
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Category</span>
+              <span className="text-xs md:text-sm">Category</span>
             </label>
 
-            <CustomSelectProps></CustomSelectProps>
+           <div className="text-sm md:text-base">
+           <CustomSelectProps></CustomSelectProps>
+           </div>
           </div>
         </section>
 
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Description</span>
+            <span className="text-xs md:text-sm">Description</span>
           </label>
           <div className="border flex items-center rounded-xl ">
             <textarea
@@ -209,13 +211,13 @@ const AddService = () => {
               rows="6"
               required
               placeholder="Write a description"
-              className="flex-1 focus:outline-none py-2 px-3 bg-transparent"
+              className="text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
             ></textarea>
           </div>
         </div>
 
         <div className="form-control mt-6">
-          <button className="btn rounded-full py-3 min-h-max h-max bg-pColor border-none text-white hover:bg-pColor">
+          <button className="btn rounded-full text-xs md:text-[14px] py-3 min-h-max h-max bg-pColor border-none text-white hover:bg-pColor">
             {loading && <ImSpinner9 className="animate-spin" />} Add Service
           </button>
         </div>

@@ -141,22 +141,22 @@ const MyReviews = () => {
      <Helmet>
                   <title>My Reviews | Service Scope</title>
                 </Helmet>
-      <div className="w-10/12 mx-auto py-10 relative">
-        <div className="flex items-center justify-between">
-        <h1 className="w-3/12 text-xl font-semibold">My Reviews</h1>
+      <div className="md:w-10/12 md:px-0 px-3  w-full md:mx-auto py-10 relative h-max">
+        <div className="flex  flex-col gap-2 lg:flex-row items-center justify-between">
+        <h1 className="md:w-3/12 text-xl font-semibold">My Reviews</h1>
         {loadData && <PulseLoader size={10} color="#FA6500" />}
         <div className="w-3/12"></div>
         </div>
         {
         loading ?
-        <div className="pt-4 space-y-3">
+        <div className="pt-4 w-full space-y-3">
         
-        <div className="skeleton h-28 w-full"></div>
-        <div className="skeleton h-28 w-full"></div>
-        <div className="skeleton h-28 w-full"></div>
-        <div className="skeleton h-28 w-full"></div>
-        <div className="skeleton h-28 w-full"></div>
-        <div className="skeleton h-28 w-full"></div>
+        <div className="skeleton h-44 lg:h-28 w-full"></div>
+        <div className="skeleton h-44 lg:h-28 w-full"></div>
+        <div className="skeleton h-44 lg:h-28 w-full"></div>
+        <div className="skeleton h-44 lg:h-28 w-full"></div>
+        <div className="skeleton h-44 lg:h-28 w-full"></div>
+        <div className="skeleton h-44 lg:h-28 w-full"></div>
         </div>
         
         :
@@ -186,13 +186,13 @@ const MyReviews = () => {
 
 
       {isVisible && (
-        <div className="w-full h-screen bg-black/30  absolute flex items-center justify-center top-0 z-30 ">
+        <div className="w-full h-screen bg-black/30  absolute  flex items-center justify-center top-0 z-30 ">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }} // Start hidden
             animate={{ opacity: 1, scale: 1 }} // Animate to visible
             exit={{ opacity: 0, y: -50 }} // Exit animation
             transition={{ duration: 0.2 }}
-            className="w-2/4  border bg-white rounded-2xl p-4 shadow-lg flex flex-col "
+            className="lg:w-3/5 w-11/12 border bg-white rounded-2xl lg:p-4 shadow-lg flex flex-col "
           >
             <div className="text-right border-b pb-3">
               <IconButton
@@ -206,11 +206,12 @@ const MyReviews = () => {
               </IconButton>
             </div>
 
-            <h1 className="text-xl font-semibold py-3">
+            <div className="lg:w-10/12 lg:px-0 px-3 pt-3  lg:mx-auto">
+            <h1 className="text-lg md:text-2xl font-bold text-center pb-5">
               Update Review Information
             </h1>
 
-            <form onSubmit={handleUpdateReviewData}>
+            <form className="px-3 lg:px-0 xl:w-7/12 mx-auto pb-10" onSubmit={handleUpdateReviewData}>
               <h2 className="font-medium py-1">Change rating star</h2>
               <div className="flex items-center gap-2">
                 <Rating
@@ -224,20 +225,23 @@ const MyReviews = () => {
                 <span>({rating})</span>
               </div>
 
-              <h2 className="font-medium py-1">Change review </h2>
+              <h2 className="font-medium md:text-base text-sm py-1">Change review </h2>
               <textarea
                 name="text"
                 placeholder={text}
                 defaultValue={text}
                 rows="10"
-                className="border w-full rounded-xl outline-transparent focus:outline-none resize-none p-3"
+                className="border text-sm md:text-base w-full rounded-xl outline-transparent focus:outline-none resize-none p-3"
               ></textarea>
 
-              <button className="btn bg-pColor w-full rounded-full border-none min-h-max h-max py-3 text-white mt-4 mb-4">
+              <button className="btn bg-pColor text-xs md:text-[14px] w-full rounded-full border-none min-h-max h-max py-3 text-white mt-4 mb-4">
                 {spinning && <ImSpinner9 className="animate-spin" />}
                 Update
               </button>
             </form>
+
+            </div>
+
           </motion.div>
         </div>
       )}

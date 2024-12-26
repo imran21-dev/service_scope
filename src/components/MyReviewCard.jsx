@@ -75,13 +75,13 @@ const MyReviewCard = ({ review, setDemoLoad, demoLoad,handleUpdate,setLoadData }
   }
 
   return (
-    <div className="border rounded-2xl p-3 flex justify-between ">
+    <div className="border rounded-2xl p-3 flex flex-col lg:flex-row justify-between ">
    
   
 
 
 
-      <div className="flex gap-3 w-3/12">
+      <div className="flex  gap-3 lg:w-3/12">
         <img
           className="w-24 h-16 object-cover rounded-lg"
           onError={handleImage}
@@ -99,17 +99,17 @@ const MyReviewCard = ({ review, setDemoLoad, demoLoad,handleUpdate,setLoadData }
         </div>
       </div>
 
-      <div className="w-8/12">
+      <div className="lg:w-8/12">
         <div className="flex items-center gap-1 pb-1">
           <Rating name="read-only" value={ratingStar} readOnly size="small" />
           <h2 className="text-sm">({ratingStar})</h2>
         </div>
         {edited && <h2 className="text-xs text-white font-medium bg-pColor  px-2 py-[1px] rounded-full w-max">Edited</h2>}
-        <p>{text}</p>
-        <h2 className="text-sm pt-2">Added on {formattedDate}</h2>
+        <p className= "text-sm md:text-base">{text}</p>
+        <h2 className="text-xs md:text-sm pt-2">Added on {formattedDate}</h2>
       </div>
 
-      <div className="w-1/12  text-right">
+      <div className="lg:w-1/12  text-right">
      
         <button onClick={() => {
           handleUpdate(_id)

@@ -66,12 +66,12 @@ const handleImage = (e) => {
   e.target.src = fakeThumb
 }
     return (
-        <tr className="flex w-full justify-between hover:bg-pColor/5 rounded-xl">
+        <tr className="flex  w-full lg:flex-row flex-col justify-between hover:bg-pColor/5 rounded-xl">
              
-        <td className="w-3/6">
+        <td className="lg:w-3/6 w-full">
           <div className="flex items-center gap-3">
             <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
+              <div className="mask mask-squircle md:h-12 h-10   md:w-12 w-10"  >
                 <img
                  onError={handleImage}
                   src={serviceImage}
@@ -79,31 +79,31 @@ const handleImage = (e) => {
                 />
               </div>
             </div>
-            <div className="w-full">
+            <div className=" w-full">
               <Link to={`/service-details/${_id}`} className="font-bold hover:text-pColor duration-150 flex items-center gap-1">{serviceTitle}<CiShare1 className="opacity-80"/></Link>
-              <div className="text-sm opacity-70  w-11/12 truncate">{description}</div>
+              <div className="text-sm opacity-70 line-clamp-2 md:w-11/12 ">{description}</div>
               <h2 className="text-xs opacity-70">Added on : {addedDate}</h2>
             </div>
           </div>
         </td>
 
         
-        <td className="w-1/6">
+        <td className="lg:w-1/6 ">
 
-        <h1 className="font-medium pb-1 w-11/12 truncate">  {companyName}</h1>
+        <h1 className="font-medium text-xs  pb-1 w-11/12 truncate">  {companyName}</h1>
          
-          <h2 onClick={handleWebsite} className="badge-secondary duration-150 w-max hover:badge-neutral rounded-badge px-3 cursor-pointer items-center bg-pColor flex gap-1 text-sm">
+          <h2 onClick={handleWebsite} className="badge-secondary duration-150 w-max hover:badge-neutral rounded-badge px-3 cursor-pointer items-center bg-pColor flex gap-1 text-xs md:text-sm">
             Visit website <FaLocationArrow className="text-xs"/>
           </h2>
         </td>
-        <td className="w-1/6 ">
+        <td className="md:w-1/6 lg:py-3 py-0">
             <h2 className="w-11/12 truncate font-medium">{category}</h2>
         </td>
-        <td className="w-1/12 ">
+        <td className="lg:w-1/12 lg:py-3 py-1">
         <h1 className="w-11/12 truncate text-pColor font-medium">${price}</h1>
         </td>
 
-        <th className="w-1/12 flex">
+        <th className="md:w-1/12 lg:py-3 py-1 flex">
           <button onClick={() => {
             handleUpdate(_id)
            

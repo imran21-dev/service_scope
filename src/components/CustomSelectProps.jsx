@@ -51,7 +51,7 @@ const CustomSelectProp = () => {
         value: category.value,
       }))}
       styles={styles}
-      placeholder="Select a service category"
+      placeholder="Category"
       isSearchable
       name="category"
       required

@@ -20,6 +20,7 @@ const FilterSelector = ({selectedCategory, setSelectedCategory,}) => {
       ...base,
       height : '42px',
       backgroundColor: '#ff000000',
+      
       borderRadius: '0.75rem',
       textAlign: 'left',  
       boxShadow: 'none', 

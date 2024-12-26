@@ -5,14 +5,14 @@ import MyServiceCart from "../components/MyServiceCart";
 import { RxTriangleDown } from "react-icons/rx";
 import { CiSearch } from "react-icons/ci";
 import { IconButton } from "@mui/material";
-import { IoMdClose } from "react-icons/io";
+import { IoIosClose, IoMdClose } from "react-icons/io";
 import { ImSpinner9 } from "react-icons/im";
 import { motion } from "motion/react";
 import UpdateCustomSelectorProps from "../components/UpdateCustomSelectorProps";
 import { PulseLoader } from "react-spinners";
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
-import { RiCloseLargeFill } from "react-icons/ri";
+
 import { useLoadingBar, } from "react-top-loading-bar";
 import noData from '../assets/noresult.json'
 import Lottie from "lottie-react";
@@ -215,14 +215,14 @@ const MyServices = () => {
                 </Helmet>
     {
      spinning ? 
-        <div className="w-10/12 mx-auto py-10 relative h-max">
-          <div className="flex items-center justify-between">
+        <div className="md:w-10/12 w-full px-3 md:mx-auto py-10 relative h-max">
+          <div className="flex items-center lg:flex-row gap-2 flex-col justify-between">
           <div className="skeleton h-6 w-44"></div>
-          <div className="skeleton h-12 rounded-full w-96"></div>
+          <div className="skeleton h-12 rounded-full w-64 lg:w-96"></div>
           </div>
-          <div className="skeleton h-12 rounded-2xl mt-5 mb-3 w-full"></div>
+          <div className="skeleton lg:block hidden h-12 rounded-2xl mt-5 mb-3 w-full"></div>
 
-        <div className="space-y-1">
+        <div className="space-y-1 pt-2">
           <div className="skeleton h-16 w-full"></div>
           <div className="skeleton h-16 w-full"></div>
           <div className="skeleton h-16 w-full"></div>
@@ -235,36 +235,39 @@ const MyServices = () => {
         </div>
      
      :
-      <div className="w-10/12 mx-auto py-10 relative h-max">
-        <div className="flex items-center justify-between">
-          <h1 className="w-3/12 text-xl font-semibold">My Services {myServices.length}</h1>
+      <div className="md:w-10/12 mx-auto py-10 relative h-max">
+        <div className="flex flex-col gap-2 lg:flex-row items-center justify-between">
+          <h1 className="md:w-3/12 text-xl font-semibold">My Services {myServices.length}</h1>
 
           {dataLoad && <PulseLoader size={10} color="#FA6500" />}
 
           
-          <div className="w-3/12 flex items-center gap-2 relative">
-          {cross &&  <IconButton className="!absolute -left-10" onClick={() => {
+          <div className="xl:w-3/12 flex items-center gap-2 relative">
+        
+            <form onSubmit={handleSearch} className="border border-pColor/50 rounded-full items-center overflow-hidden flex w-full">
+            
+              {cross ?  <button className="" onClick={() => {
             setDemoLoad(demoLoad + 1)
             setCross(false)
             }}>
-          <RiCloseLargeFill className="text-lg" />
-         </IconButton>}
-            <form onSubmit={handleSearch} className="border border-pColor/50 rounded-full items-center overflow-hidden flex w-full">
-              <CiSearch className="text-3xl text-secondaryTextColor/50 ml-3" />
+         <IoIosClose className="text-2xl md:text-3xl text-secondaryTextColor/50 ml-2" />
+         </button> :
+           <CiSearch className="text-2xl md:text-3xl text-secondaryTextColor/50 ml-3" />
+         }
               <input
               name="keyword"
-                className="focus:outline-none bg-transparent px-1 py-2 w-full"
+                className="focus:outline-none text-sm md:text-base bg-transparent px-1 py-2 w-full"
                 placeholder="Search..."
                 type="text"
               />
-              <button className="text-sm font-medium h-10 hover:px-7 duration-200 bg-pColor px-6 text-white">
+              <button className="text-xs md:text-sm font-medium h-10 hover:px-7 duration-200 bg-pColor px-6 text-white">
                 Search
               </button>
             </form>
           </div>
         </div>
         <div className="pt-5">
-          <section className="w-full bg-pColor/10 rounded-xl mb-1 text-pColor  py-3 flex text-sm font-bold">
+          <section className="w-full hidden bg-pColor/10 rounded-xl mb-1 text-pColor  py-3 lg:flex text-sm font-bold">
             <div className=" w-3/6 flex pl-6 gap-5">
               <h2 className="flex items-center">
                 Logo <RxTriangleDown />
@@ -299,7 +302,7 @@ const MyServices = () => {
           <div className="skeleton h-16 w-full"></div>
           <div className="skeleton h-16 w-full"></div>
           </div> :
-          <table className="table">
+          <table className="table overflow-x-auto">
             <tbody>
 
             {
@@ -340,13 +343,13 @@ const MyServices = () => {
       {isVisible && (
         <div className="w-full h-screen bg-black/30  absolute flex items-center justify-center top-0 z-30 ">
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }} // Start hidden
-            animate={{ opacity: 1, scale: 1 }} // Animate to visible
-            exit={{ opacity: 0, y: -50 }} // Exit animation
+            initial={{ opacity: 0, scale: 0.5 }} 
+            animate={{ opacity: 1, scale: 1 }} 
+            exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.2 }}
-            className="w-3/5  border bg-white rounded-2xl p-4 shadow-lg flex flex-col "
+            className="lg:w-3/5  border bg-white rounded-2xl lg:p-4 shadow-lg flex flex-col "
           >
-            <div className="text-right border-b ">
+            <div className="text-right pt-7 lg:pt-0 border-b ">
               <IconButton
                 onClick={() => {
                   setIsVisible(false)
@@ -359,21 +362,21 @@ const MyServices = () => {
               </IconButton>
             </div>
 
-            <div className="w-10/12 mx-auto py-10 text-center">
-              <h1 className="text-xl font-semibold">
+            <div className="lg:w-10/12 lg:px-0 px-3 pt-3 md:pt-10 mx-auto text-center">
+              <h1 className="text-lg md:text-2xl font-bold">
                 Update your Service Information
               </h1>
-              <p className="py-1 text-secondaryTextColor/50">
+              <p className="py-1 text-secondaryTextColor/50 md:pb-5 text-sm md:text-base">
                 Keep Your Service Up-to-Date
               </p>
 
               <form
                 onSubmit={handleUpdateService}
-                className="card-body w-full mx-auto"
+                className="px-3 lg:px-0 xl:w-7/12 mx-auto pb-10"
               >
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Service Title</span>
+                    <span className="text-xs md:text-sm">Service Title</span>
                   </label>
                   <div className="border flex items-center rounded-xl ">
                     <input
@@ -381,7 +384,7 @@ const MyServices = () => {
                       type="text"
                       name="serviceTitle"
                       placeholder="Service title"
-                      className=" flex-1 focus:outline-none py-2 px-3 bg-transparent"
+                      className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
                       required
                     />
                   </div>
@@ -389,7 +392,7 @@ const MyServices = () => {
 
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Service Image</span>
+                    <span className="text-xs md:text-sm">Service Image</span>
                   </label>
                   <div className="border flex items-center rounded-xl ">
                     <input
@@ -397,7 +400,7 @@ const MyServices = () => {
                       type="url"
                       name="serviceImage"
                       placeholder="Service image URL"
-                      className=" flex-1 focus:outline-none py-2 px-3 bg-transparent"
+                      className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
                       required
                     />
                   </div>
@@ -406,7 +409,7 @@ const MyServices = () => {
                 <section className="grid grid-cols-2 gap-x-6 gap-y-1">
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text">Company Name</span>
+                      <span className="text-xs md:text-sm">Company Name</span>
                     </label>
                     <div className="border flex items-center rounded-xl ">
                       <input
@@ -414,7 +417,7 @@ const MyServices = () => {
                         type="text"
                         name="companyName"
                         placeholder="Company name"
-                        className=" flex-1 focus:outline-none py-2 px-3 bg-transparent"
+                        className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
                         required
                       />
                     </div>
@@ -422,7 +425,7 @@ const MyServices = () => {
 
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text">Website URL</span>
+                      <span className="text-xs md:text-sm">Website URL</span>
                     </label>
                     <div className="border flex items-center rounded-xl ">
                       <input
@@ -430,7 +433,7 @@ const MyServices = () => {
                         type="url"
                         name="website"
                         placeholder="Website URL"
-                        className=" flex-1 focus:outline-none py-2 px-3 bg-transparent"
+                        className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
                         required
                       />
                     </div>
@@ -438,7 +441,7 @@ const MyServices = () => {
 
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text">Price</span>
+                      <span className="text-xs md:text-sm">Price</span>
                     </label>
                     <div className="border flex items-center rounded-xl ">
                       <input
@@ -446,25 +449,27 @@ const MyServices = () => {
                         type="number"
                         name="price"
                         placeholder="Service price"
-                        className=" flex-1 focus:outline-none py-2 px-3 bg-transparent"
+                        className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
                         required
                       />
                     </div>
                   </div>
                   <div className="form-control">
                     <label className="label">
-                      <span className="label-text">Category</span>
+                      <span className="text-xs md:text-sm">Category</span>
                     </label>
-
+                  <div className="text-sm md:text-base">
                     <UpdateCustomSelectorProps
                       category={categoryD}
                     ></UpdateCustomSelectorProps>
+
+                  </div>
                   </div>
                 </section>
 
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Description</span>
+                    <span className="text-xs md:text-sm">Description</span>
                   </label>
                   <div className="border flex items-center rounded-xl ">
                     <textarea
@@ -473,13 +478,13 @@ const MyServices = () => {
                       rows="6"
                       required
                       placeholder="Write a description"
-                      className="flex-1 resize-none focus:outline-none py-2 px-3 bg-transparent"
+                      className="flex-1 text-sm md:text-base resize-none focus:outline-none py-2 px-3 bg-transparent"
                     ></textarea>
                   </div>
                 </div>
 
                 <div className="form-control mt-6">
-                  <button className="btn rounded-full py-3 min-h-max h-max bg-pColor border-none text-white hover:bg-pColor">
+                  <button className="btn rounded-full text-xs md:text-[14px] py-3 min-h-max h-max bg-pColor border-none text-white hover:bg-pColor">
                     {loading && <ImSpinner9 className="animate-spin" />} Update
                   </button>
                 </div>

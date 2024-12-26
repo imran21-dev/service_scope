@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import SkeletonCart from "../components/SkeletonCart";
 import noData from '../assets/noresult.json'
 import AllServiceCart from "../components/AllServiceCart";
-import { IconButton } from "@mui/material";
+
 import { RiCloseLargeFill, RiEqualizerFill } from "react-icons/ri";
 import { CiSearch } from "react-icons/ci";
 import { useLoadingBar } from "react-top-loading-bar";
@@ -11,6 +11,7 @@ import FilterSelector from "../components/FilterSelector";
 import Lottie from "lottie-react";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { IoIosClose } from "react-icons/io";
 
 
 const Services = () => {
@@ -79,40 +80,42 @@ const Services = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-start">
 
-    <div className="w-10/12 mx-auto py-10 z-0 relative">
+    <div className="md:w-10/12  w-full px-3 lg:px-0 md:mx-auto md:py-10 z-0 relative">
       <Helmet>
               <title>All Services | Service Scope</title>
             </Helmet>
-      <div className="grid grid-cols-3 gap-6 items-center relative ">
-          <h1 className=" text-xl font-semibold">All Services {allServices.length}</h1>
+      <div className="grid lg:grid-cols-3 gap-3 lg:gap-6 items-center relative ">
+          <h1 className="text-lg md:text-xl font-semibold">All Services {allServices.length}</h1>
 
           
 
           
           <div className=" flex items-center gap-2 relative">
-          {cross &&  <IconButton className="!absolute -left-10" onClick={() => {
+          
+            <form onSubmit={handleSearch} className="border border-pColor/50 rounded-full items-center overflow-hidden flex w-full">
+            {cross ?  <button className="" onClick={() => {
             setDemoLoad(demoLoad + 1)
             setCross(false)
             }}>
-          <RiCloseLargeFill className="text-lg" />
-         </IconButton>}
-            <form onSubmit={handleSearch} className="border border-pColor/50 rounded-full items-center overflow-hidden flex w-full">
-              <CiSearch className="text-3xl text-secondaryTextColor/50 ml-3" />
+          <IoIosClose className="text-2xl md:text-3xl text-secondaryTextColor/50 ml-2" />
+         </button> :
+         <CiSearch className="text-2xl md:text-3xl text-secondaryTextColor/50 ml-3" />
+         }
               <input
               name="keyword"
               id='searchInput'
-                className="focus:outline-none bg-transparent px-1 py-2 w-full"
+                className="focus:outline-none text-sm md:text-base bg-transparent px-1 py-2 w-full"
                 placeholder="Search..."
                 type="text"
               />
-              <button className="text-sm font-medium h-10 hover:px-7 duration-200 bg-pColor px-6 text-white">
+              <button className="text-xs md:text-sm font-medium h-10 hover:px-7 duration-200 bg-pColor px-6 text-white">
                 Search
               </button>
             </form>
           </div>
          <div className="w-full  flex justify-end">
           
-         <div className="flex w-2/4  items-center gap-1 border rounded-full">
+         <div className="flex lg:w-2/4  items-center gap-1 border rounded-full">
          {
           filterClose ? 
           
@@ -124,14 +127,16 @@ const Services = () => {
           setFilterClose(true)
          }} className="text-lg ml-3 cursor-pointer hover:text-pColor duration-200" />
          }
-         <div className="w-full ">
+         <div className="w-full text-xs md:text-sm">
           <FilterSelector  selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}></FilterSelector>
           </div>
          </div>
          </div>
         </div>
+
+
       {sleketonTime ? (
-        <div className="grid grid-cols-4 gap-6  py-5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 md:gap-6 gap-3  py-5">
           {featuredServicesSkeleton.map((skeleton, idx) => (
             <SkeletonCart key={idx}></SkeletonCart>
           ))}
@@ -140,7 +145,8 @@ const Services = () => {
         allServices.length < 1 ? <div className="flex items-center flex-col justify-center h-screen w-full absolute -z-10 left-0 top-0">
           <Lottie loop={false} className="w-2/12" animationData={noData}></Lottie>
           <h1 className="font-medium">No result found</h1>
-        </div> : <div className="grid grid-cols-4 gap-6  py-5">
+        </div> : 
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 md:gap-6 gap-3  py-5">
         {allServices.map((service) => (
           <AllServiceCart service={service} key={service._id}></AllServiceCart>
           ))}
