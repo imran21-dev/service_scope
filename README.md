@@ -2,7 +2,7 @@
 ## Project Name - Service Scope
 ### Live URLs 
 - [https://service-scope-6413b.web.app/](https://service-scope-6413b.web.app/)
-- [https://service-scope-6413b.firebaseapp.com/](https://service-scope-6413b.firebaseapp.com/)
+
 ## Purpose of the Website
 This Service Review Website serves as a platform for users to discover, share, and manage services along with their reviews.
 
