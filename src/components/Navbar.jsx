@@ -24,6 +24,7 @@ const Navbar = () => {
       confirmButtonColor: "#f12804",
       cancelButtonColor: "#16A34A",
       confirmButtonText: "Yes, log me out",
+      scrollbarPadding: false,
       customClass: {
         title: "text-xl  md:text-3xl font-bold ",
         text: "text-3xl ",
@@ -144,7 +145,7 @@ const Navbar = () => {
           }
         </ul>
       </div>
-      <div className="navbar-end  space-x-2">
+      <div className="navbar-end pr-2 space-x-1 md:space-x-2">
         {processing ? (
           <>
             <div className="skeleton md:px-6 min-h-max h-max md:py-3 py-1 px-3 md:text-[14px] text-xs rounded-full text-transparent">

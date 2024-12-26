@@ -105,7 +105,7 @@ const AddService = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-start">
 
-    <div className="lg:w-10/12 lg:px-0 px-3 pt-3 md:pt-10 mx-auto text-center">
+    <div className="lg:w-10/12 lg:px-0 px-3 pt-3 md:pt-10  overflow-x-hidden mx-auto text-center">
        <Helmet>
                     <title>Add Service | Service Scope</title>
                   </Helmet>

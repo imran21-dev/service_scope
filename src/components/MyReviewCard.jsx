@@ -35,6 +35,7 @@ const MyReviewCard = ({ review, setDemoLoad, demoLoad,handleUpdate,setLoadData }
       showCancelButton: true,
       confirmButtonColor: "#f12804",
       cancelButtonColor: "#16A34A",
+      scrollbarPadding: false,
       confirmButtonText: "Yes, Delete it",
       customClass: {
         title: "text-xl  md:text-3xl font-bold ",
@@ -51,6 +52,7 @@ const MyReviewCard = ({ review, setDemoLoad, demoLoad,handleUpdate,setLoadData }
               Swal.fire({
                 icon: "success",
                 title: "Deleted!",
+                
                 text: "Review deleted Successfully!",
                 confirmButtonText: "Okay",
                 scrollbarPadding: false,

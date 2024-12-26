@@ -24,6 +24,7 @@ const handleDelete = () => {
         showCancelButton: true,
         confirmButtonColor: "#f12804",
         cancelButtonColor: "#16A34A",
+        scrollbarPadding: false,
         confirmButtonText: "Yes, Delete it",
         customClass: {
           title: "text-xl  md:text-3xl font-bold ",
@@ -44,6 +45,7 @@ const handleDelete = () => {
                   confirmButtonText: "Okay",
                   scrollbarPadding: false,
                   showConfirmButton: false,
+               
                   timer: 1500,
                   customClass: {
                     title: "text-xl  md:text-3xl font-bold ",
