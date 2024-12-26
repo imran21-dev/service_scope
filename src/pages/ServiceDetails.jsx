@@ -682,7 +682,7 @@ const ServiceDetails = () => {
                         type="text"
                         name="companyName"
                         placeholder="Company name"
-                        className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
+                        className=" text-sm w-full md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
                         required
                       />
                     </div>
@@ -698,7 +698,7 @@ const ServiceDetails = () => {
                         type="url"
                         name="website"
                         placeholder="Website URL"
-                        className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
+                        className=" text-sm w-full md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
                         required
                       />
                     </div>
@@ -714,7 +714,7 @@ const ServiceDetails = () => {
                         type="number"
                         name="price"
                         placeholder="Service price"
-                        className=" text-sm md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
+                        className=" text-sm w-full md:text-base flex-1 focus:outline-none py-2 px-2 bg-transparent"
                         required
                       />
                     </div>
