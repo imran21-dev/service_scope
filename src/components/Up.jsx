@@ -5,17 +5,17 @@ import Select from 'react-select';
 
 
 
-const UpdateCustomSelectorProps = ({category}) => {
+const Up = ({category}) => {
   
   const [serviceCategories, setServiceCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null);
- 
+  
   useEffect(()=>{
-   fetch('category.json')
+   fetch('/category.json')
    .then(res => res.json())
    .then(data => {
     setServiceCategories(data)
-  
+   
     const defaultCategory = data.find((cate) => cate.label === category)
     if (defaultCategory) {
         setSelectedCategory({
@@ -73,7 +73,7 @@ const UpdateCustomSelectorProps = ({category}) => {
     />
   );
 };
-UpdateCustomSelectorProps.propTypes = {
+Up.propTypes = {
     category :PropTypes.string
 }
-export default UpdateCustomSelectorProps;
+export default Up;

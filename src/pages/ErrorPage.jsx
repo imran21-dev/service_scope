@@ -19,9 +19,9 @@ const ErrorPage = () => {
              <Helmet>
                           <title>Error | Service Scope</title>
                         </Helmet>
-            <Lottie className='w-64' animationData={error}></Lottie>
-            <h1 className='text-3xl font-semibold'>{status}</h1>
-            <h2 className='text-lg font-medium'>{statusText}</h2>
+            <Lottie className='w-44 lg:w-64' animationData={error}></Lottie>
+            <h1 className='text-xl lg:text-3xl font-semibold'>{status}</h1>
+            <h2 className=' lg:text-lg font-medium'>{statusText}</h2>
             <h3>{errorCode}</h3>
             <Link to='/' className='btn bg-pColor rounded-full px-8 min-h-max h-max py-3 text-white my-3'>Back to Home</Link>
         </div>

@@ -72,6 +72,8 @@ const MyReviewCard = ({ review, setDemoLoad, demoLoad,handleUpdate,setLoadData }
       }
     });
   };
+
+  
   const handleImage = (e) => {
     e.target.src = fakeThumb
   }
