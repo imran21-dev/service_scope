@@ -15,6 +15,15 @@ This Service Review Website serves as a platform for users to discover, share, a
 
 This platform aims to empower users by creating a transparent and collaborative space for sharing service experiences. Whether it's a small local service or a large enterprise, this website ensures that everyone can find trustworthy information and share their insights.
 
+### Technologies
+-  JavaScript
+-  React
+-  Firebase
+-  Node js
+-  Express
+-  MongoDB
+-  JWT
+
 ### npm Packages
 - lottie-react
 - moment
