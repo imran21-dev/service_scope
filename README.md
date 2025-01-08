@@ -2,6 +2,8 @@
 ## Project Name - Service Scope
 ### Live URLs 
 - [https://service-scope-6413b.web.app/](https://service-scope-6413b.web.app/)
+### Project's Docs
+-  [https://docs.google.com/document/d/1pG3Lea3dzAqI2bgxgob1oh1lmnk7pSpG3gaXeBWfUbg/edit?tab=t.0#heading=h.7hjcn4q0n6sx](https://docs.google.com/document/d/1pG3Lea3dzAqI2bgxgob1oh1lmnk7pSpG3gaXeBWfUbg/edit?tab=t.0#heading=h.7hjcn4q0n6sx)
 
 ## Purpose of the Website
 This Service Review Website serves as a platform for users to discover, share, and manage services along with their reviews.
@@ -64,7 +66,24 @@ This platform aims to empower users by creating a transparent and collaborative 
 - react-top-loading-bar: ^3.0.2  
 - sort-by: ^1.2.0  
 - sweetalert2: ^11.15.3  
-- swiper: ^11.1.15  
+- swiper: ^11.1.15
+
+### Dev Dependencies
+- @eslint/js: ^9.17.0  
+- @types/react: ^18.3.17  
+- @types/react-dom: ^18.3.5  
+- @vitejs/plugin-react: ^4.3.4  
+- autoprefixer: ^10.4.20  
+- daisyui: ^4.12.22  
+- eslint: ^9.17.0  
+- eslint-plugin-react: ^7.37.2  
+- eslint-plugin-react-hooks: ^5.0.0  
+- eslint-plugin-react-refresh: ^0.4.16  
+- globals: ^15.13.0  
+- postcss: ^8.4.49  
+- tailwindcss: ^3.4.17  
+- vite: ^6.0.3  
+
 
 ### Installation
 Run ```npm install``` to install project dependencies
