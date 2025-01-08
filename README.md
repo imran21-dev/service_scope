@@ -66,6 +66,8 @@ This platform aims to empower users by creating a transparent and collaborative 
 - sweetalert2: ^11.15.3  
 - swiper: ^11.1.15  
 
+### Installation
+Run ```npm install``` to install project dependencies
     
 
 
