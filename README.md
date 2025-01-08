@@ -1,6 +1,6 @@
 
 ## Project Name - Service Scope
-![Service Scope](https://i.postimg.cc/cJHmNLn0/20240526-154725.jpg)
+![Service Scope](https://i.postimg.cc/FKRN42M1/Minimalist-Website-Launch-Computer-Mockup-Instagram-Post.jpg)
 ## Purpose of the Website
 This Service Review Website serves as a platform for users to discover, share, and manage services along with their reviews.
 ### Live URLs 
