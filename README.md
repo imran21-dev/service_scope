@@ -1,6 +1,6 @@
 
 ## Project Name - Service Scope
-![Service Scope](https://www.canva.com/design/DAGbkkx9rPo/3sct6mzccxbolom6R-ALPQ/view?utm_content=DAGbkkx9rPo&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=hd8e2b3eabe)
+![Service Scope](https://i.postimg.cc/cJHmNLn0/20240526-154725.jpg)
 ## Purpose of the Website
 This Service Review Website serves as a platform for users to discover, share, and manage services along with their reviews.
 ### Live URLs 
